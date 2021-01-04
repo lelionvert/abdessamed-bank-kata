@@ -12,10 +12,14 @@ public class Account {
     }
 
     public void deposit(Money money) throws MinimumMoneyException {
-        if(money.isLessThan(MINIMUM_MONEY_ALLOWED)) {
+        if(isMinimumMoneyAllowedRespected(money)) {
             throw new MinimumMoneyException();
         }
         balance = balance.add(money);
+    }
+
+    private boolean isMinimumMoneyAllowedRespected(Money money) {
+        return money.isLessThan(MINIMUM_MONEY_ALLOWED);
     }
 
     public Money getBalance() {
