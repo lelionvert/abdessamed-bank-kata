@@ -1,6 +1,9 @@
 package fr.lcdlv.kata.bank;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -80,5 +83,22 @@ public class MoneyTest {
         boolean isLessThanOrEqualTo = one.isLessThanOrEqualTo(two);
 
         assertTrue(isLessThanOrEqualTo);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "10,00€;10.00",
+            "10,50€;10.50",
+            "20,23€;20.23",
+            "5,19€;5.19",
+            "10,08€;10.08",
+            "10,94€;10.94",
+    }, delimiter = ';')
+    public void toStringFormat(String expected, double moneyAsDouble) {
+        Money money = Money.of(moneyAsDouble);
+
+        String actual = money.toString();
+
+        Assertions.assertEquals(expected, actual);
     }
 }
