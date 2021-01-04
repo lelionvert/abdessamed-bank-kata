@@ -15,6 +15,10 @@ public class Money {
         return new Money(BigDecimal.valueOf(i));
     }
 
+    public static Money of(BigDecimal i) {
+        return new Money(i);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -31,5 +35,9 @@ public class Money {
     @Override
     public String toString() {
         return value.toString();
+    }
+
+    public Money add(Money money) {
+        return Money.of(value.add(money.value));
     }
 }

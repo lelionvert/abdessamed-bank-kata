@@ -22,4 +22,14 @@ public class AccountTest {
 
         Assertions.assertEquals(Money.of(1), balance);
     }
+
+    @Test
+    public void depositMoneyOnAccount() {
+        Account account = new Account();
+
+        account.deposit(Money.of(1));
+
+        Money balance = account.getBalance();
+        Assertions.assertEquals(Money.of(1), balance);
+    }
 }
