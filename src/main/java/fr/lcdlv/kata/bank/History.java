@@ -18,6 +18,11 @@ public class History {
         transactions.add(transaction);
     }
 
+
+    public Money sum() {
+        return transactions.stream().map(Transaction::getAmount).reduce(Money.of(0), Money::add, Money::add);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,9 +42,5 @@ public class History {
                 + transactions.stream()
                 .map(Transaction::toString)
                 .collect(joining("\n"));
-    }
-
-    public Money sum() {
-        return Money.of(0);
     }
 }
