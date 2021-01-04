@@ -9,7 +9,10 @@ public class Account {
         this.balance = balance;
     }
 
-    public void deposit(Money money) {
+    public void deposit(Money money) throws MinimumMoneyException {
+        if(money.isLessThan(Money.of(0.01))) {
+            throw new MinimumMoneyException();
+        }
         balance = balance.add(money);
     }
 

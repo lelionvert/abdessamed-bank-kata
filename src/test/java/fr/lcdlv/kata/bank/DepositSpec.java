@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class DepositSpec {
 
     @Test
-    public void depositMoneyOnAccount() {
+    public void depositMoneyOnAccount() throws MinimumMoneyException {
         Money money = Money.of(1);
         Account account = new Account(Money.of(0));
 

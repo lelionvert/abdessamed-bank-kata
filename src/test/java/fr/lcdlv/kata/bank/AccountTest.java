@@ -15,7 +15,7 @@ public class AccountTest {
     }
 
     @Test
-    public void depositMoneyOnAccount() {
+    public void depositMoneyOnAccount() throws MinimumMoneyException {
         Account account = new Account(Money.of(0));
 
         account.deposit(Money.of(1));
