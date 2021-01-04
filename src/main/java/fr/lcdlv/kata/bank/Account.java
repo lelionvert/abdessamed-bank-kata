@@ -4,10 +4,6 @@ public class Account {
 
     private Money balance;
 
-    public Account() {
-        balance = Money.of(0);
-    }
-
     public Account(Money balance) {
 
         this.balance = balance;

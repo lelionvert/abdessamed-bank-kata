@@ -8,7 +8,7 @@ public class DepositSpec {
     @Test
     public void depositMoneyOnAccount() {
         Money money = Money.of(1);
-        Account account = new Account();
+        Account account = new Account(Money.of(0));
 
         account.deposit(money);
 
@@ -19,7 +19,7 @@ public class DepositSpec {
     @Test
     public void depositMoneyOnAccount2() {
         Money money = Money.of(0);
-        Account account = new Account();
+        Account account = new Account(Money.of(0));
 
         Assertions.assertThrows(MinimumMoneyException.class, () -> account.deposit(money));
     }
