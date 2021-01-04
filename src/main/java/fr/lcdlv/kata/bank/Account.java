@@ -2,6 +2,8 @@ package fr.lcdlv.kata.bank;
 
 public class Account {
 
+    public static final Money MINIMUM_MONEY_ALLOWED = Money.of(0.01);
+
     private Money balance;
 
     public Account(Money balance) {
@@ -10,7 +12,7 @@ public class Account {
     }
 
     public void deposit(Money money) throws MinimumMoneyException {
-        if(money.isLessThan(Money.of(0.01))) {
+        if(money.isLessThan(MINIMUM_MONEY_ALLOWED)) {
             throw new MinimumMoneyException();
         }
         balance = balance.add(money);
