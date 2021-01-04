@@ -53,7 +53,7 @@ public class MoneyTest {
     }
 
     @Test
-    public void isBiggerThanShouldReturnTrue() {
+    public void isLessThanShouldReturnTrue() {
         Money one = Money.of(1);
         Money two = Money.of(2);
 
