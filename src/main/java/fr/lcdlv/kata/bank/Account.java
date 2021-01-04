@@ -22,15 +22,19 @@ public class Account {
         return money.isLessThan(MINIMUM_MONEY_ALLOWED);
     }
 
-    public Money getBalance() {
-        return balance;
-    }
-
     public void withdraw(Money money) throws OverdraftException {
-        if (money.isBiggerThanOrEqualTo(balance)) {
+        if (isOverdraft(money)) {
             throw new OverdraftException();
         }
         balance = balance.subtract(money);
+    }
+
+    private boolean isOverdraft(Money money) {
+        return money.isBiggerThanOrEqualTo(balance);
+    }
+
+    public Money getBalance() {
+        return balance;
     }
 
     public History getHistory() {
