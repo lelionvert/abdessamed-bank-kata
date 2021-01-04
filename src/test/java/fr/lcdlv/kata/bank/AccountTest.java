@@ -13,4 +13,13 @@ public class AccountTest {
 
         Assertions.assertEquals(Money.of(0), balance);
     }
+
+    @Test
+    public void getBalanceShouldReturnCurrentAccountBalance2() {
+        Account account = new Account(Money.of(1));
+
+        Money balance = account.getBalance();
+
+        Assertions.assertEquals(Money.of(1), balance);
+    }
 }
