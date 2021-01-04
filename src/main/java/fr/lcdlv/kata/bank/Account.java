@@ -32,4 +32,8 @@ public class Account {
         }
         balance = balance.subtract(money);
     }
+
+    public History getHistory() {
+        return null;
+    }
 }
