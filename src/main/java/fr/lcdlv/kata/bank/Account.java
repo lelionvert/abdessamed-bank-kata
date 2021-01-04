@@ -12,7 +12,7 @@ public class Account {
     }
 
     public void deposit(Money money) throws MinimumMoneyAllowedException {
-        if(isAllowed(money)) {
+        if (isAllowed(money)) {
             throw new MinimumMoneyAllowedException();
         }
         balance = balance.add(money);
@@ -27,7 +27,7 @@ public class Account {
     }
 
     public void withdraw(Money money) throws OverdraftException {
-        if(money.isBiggerThanOrEqualTo(balance)) {
+        if (money.isBiggerThanOrEqualTo(balance)) {
             throw new OverdraftException();
         }
         balance = balance.subtract(money);
