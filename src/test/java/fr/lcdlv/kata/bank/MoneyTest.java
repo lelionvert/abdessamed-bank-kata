@@ -24,4 +24,13 @@ public class MoneyTest {
 
         assertNotEquals(one, two);
     }
+
+    @Test
+    public void addMoney() {
+        Money one = Money.of(1);
+
+        Money two = one.add(one);
+
+        assertEquals(Money.of(2), two);
+    }
 }
