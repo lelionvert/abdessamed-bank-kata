@@ -33,4 +33,21 @@ public class MoneyTest {
 
         assertEquals(Money.of(2), two);
     }
+
+    @Test
+    public void compareToEquivalentMoney() {
+        Money one = Money.of(1);
+
+        int c = one.compareTo(one);
+
+        assertEquals(0, c);
+    }
+
+    @Test
+    public void isBiggerThanShouldReturnTrue() {
+        Money one = Money.of(1);
+        Money two = Money.of(2);
+
+        boolean isBiggerOrEqualTo = two.isBiggerThanOrEquals(one);
+    }
 }

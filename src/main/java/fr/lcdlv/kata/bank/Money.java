@@ -4,12 +4,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-public class Money {
+public class Money implements Comparable<Money> {
 
     private BigDecimal value;
 
     public Money(BigDecimal value) {
-        this.value = value.setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal scaledValue = value.setScale(2, RoundingMode.HALF_EVEN);
+
+        this.value = scaledValue;
     }
 
     public static Money of(double money) {
@@ -40,5 +42,13 @@ public class Money {
 
     public Money add(Money money) {
         return Money.of(value.add(money.value));
+    }
+
+    public int compareTo(Money other) {
+        return value.compareTo(other.value);
+    }
+
+    public boolean isBiggerThanOrEquals(Money other) {
+        return compareTo(other) >= 0;
     }
 }
