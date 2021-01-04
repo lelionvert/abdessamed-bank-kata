@@ -28,12 +28,12 @@ public class HistorySpec {
     private History expectedHistory() {
         History history = new History();
 
-        history.add(depositTransaction(Money.of(10)));
-        history.add(depositTransaction(Money.of(15)));
-        history.add(depositTransaction(Money.of(20)));
-        history.add(withdrawTransaction(Money.of(20)));
-        history.add(depositTransaction(Money.of(20)));
-        history.add(withdrawTransaction(Money.of(30)));
+        history.record(depositTransaction(Money.of(10)));
+        history.record(depositTransaction(Money.of(15)));
+        history.record(depositTransaction(Money.of(20)));
+        history.record(withdrawTransaction(Money.of(20)));
+        history.record(depositTransaction(Money.of(20)));
+        history.record(withdrawTransaction(Money.of(30)));
 
         return history;
     }
