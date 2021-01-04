@@ -44,4 +44,27 @@ public class HistoryTest {
 
         return history;
     }
+
+    @Test
+    public void toStringHistory() {
+        History history = new History();
+
+        history.record(new DepositTransaction(Money.of(10)));
+        history.record(new DepositTransaction(Money.of(10.50)));
+        history.record(new DepositTransaction(Money.of(20.23)));
+        history.record(new WithdrawTransaction(Money.of(5.19)));
+        history.record(new WithdrawTransaction(Money.of(10.08)));
+        history.record(new DepositTransaction(Money.of(10.943)));
+
+        Assertions.assertEquals(
+                """
+                        History size : 6
+                        Deposit transaction : +10,00€
+                        Deposit transaction : +10,50€
+                        Deposit transaction : +20,23€
+                        Withdraw transaction : -5,19€
+                        Withdraw transaction : -10,08€
+                        Deposit transaction : +10,94€""",
+                history.toString());
+    }
 }

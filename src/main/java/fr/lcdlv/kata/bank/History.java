@@ -3,6 +3,9 @@ package fr.lcdlv.kata.bank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.joining;
 
 public class History {
 
@@ -27,5 +30,13 @@ public class History {
     @Override
     public int hashCode() {
         return Objects.hash(transactions);
+    }
+
+    @Override
+    public String toString() {
+        return "History size : " + size() + "\n"
+                + transactions.stream()
+                .map(Transaction::toString)
+                .collect(joining("\n"));
     }
 }

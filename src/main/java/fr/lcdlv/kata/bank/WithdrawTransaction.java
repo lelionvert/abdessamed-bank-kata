@@ -22,4 +22,9 @@ public class WithdrawTransaction implements Transaction {
     public int hashCode() {
         return Objects.hash(amount);
     }
+
+    @Override
+    public String toString() {
+        return "Withdraw transaction : -" + amount.toString();
+    }
 }

@@ -44,7 +44,8 @@ public class Money implements Comparable<Money> {
     private DecimalFormat decimalFormatter() {
         DecimalFormat decimalFormat = new DecimalFormat("##,##€");
         decimalFormat.setMaximumFractionDigits(2);
-        decimalFormat.setMinimumIntegerDigits(2);
+        decimalFormat.setMinimumFractionDigits(2);
+        decimalFormat.setMinimumIntegerDigits(1);
         decimalFormat.setGroupingUsed(false);
         return decimalFormat;
     }

@@ -22,4 +22,9 @@ public class DepositTransaction implements Transaction {
     public int hashCode() {
         return Objects.hash(amount);
     }
+
+    @Override
+    public String toString() {
+        return "Deposit transaction : +" + amount;
+    }
 }
