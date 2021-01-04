@@ -5,7 +5,7 @@ public class History {
         return 0;
     }
 
-    public void record(Transaction depositTransaction) {
+    public void record(Transaction transaction) {
 
     }
 }
