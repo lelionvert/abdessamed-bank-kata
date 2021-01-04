@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class BalanceSpec {
 
     @Test
-    public void getBalance() {
+    public void getBalanceInReadableForm() {
         Account account = new Account(Money.of(157.83));
 
         Money balance = account.getBalance();
