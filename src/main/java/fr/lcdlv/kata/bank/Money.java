@@ -1,6 +1,7 @@
 package fr.lcdlv.kata.bank;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money {
@@ -8,7 +9,7 @@ public class Money {
     private BigDecimal value;
 
     public Money(BigDecimal value) {
-        this.value = value;
+        this.value = value.setScale(2, RoundingMode.HALF_EVEN);
     }
 
     public static Money of(double money) {
