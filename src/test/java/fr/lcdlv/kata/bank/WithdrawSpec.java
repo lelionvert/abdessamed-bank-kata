@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class WithdrawSpec {
 
     @Test
-    public void withdrawWithoutOverdraft() {
+    public void withdrawWithoutOverdraft() throws OverdraftException {
         Account account = new Account(Money.of(50));
 
         account.withdraw(Money.of(10));
