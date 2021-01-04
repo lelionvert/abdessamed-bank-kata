@@ -27,6 +27,8 @@ public class Account {
     }
 
     public void withdraw(Money money) {
-
+        if(balance.isBiggerThanOrEqualTo(money)) {
+            balance = balance.subtract(money);
+        }
     }
 }
