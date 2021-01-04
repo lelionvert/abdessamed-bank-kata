@@ -11,12 +11,12 @@ public class Money {
         this.value = value;
     }
 
-    public static Money of(double i) {
-        return new Money(BigDecimal.valueOf(i));
+    public static Money of(double money) {
+        return new Money(BigDecimal.valueOf(money));
     }
 
-    public static Money of(BigDecimal i) {
-        return new Money(i);
+    public static Money of(BigDecimal money) {
+        return new Money(money);
     }
 
     @Override
