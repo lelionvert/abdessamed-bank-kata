@@ -17,7 +17,7 @@ public class HistoryTest {
     @Test
     public void recordShouldAddTransactionToHistorySize() {
         History history = new History();
-        Transaction transaction = new DummyTransaction();
+        Transaction transaction = new Transaction(Money.of(0));
 
         history.record(transaction);
 
@@ -49,22 +49,22 @@ public class HistoryTest {
     public void toStringHistory() {
         History history = new History();
 
-        history.record(new DepositTransaction(Money.of(10)));
-        history.record(new DepositTransaction(Money.of(10.50)));
-        history.record(new DepositTransaction(Money.of(20.23)));
-        history.record(new WithdrawTransaction(Money.of(5.19)));
-        history.record(new WithdrawTransaction(Money.of(10.08)));
-        history.record(new DepositTransaction(Money.of(10.943)));
+        history.record(new Transaction(Money.of(10)));
+        history.record(new Transaction(Money.of(10.50)));
+        history.record(new Transaction(Money.of(20.23)));
+        history.record(new Transaction(Money.of(5.19).opposite()));
+        history.record(new Transaction(Money.of(10.08).opposite()));
+        history.record(new Transaction(Money.of(10.943)));
 
         Assertions.assertEquals(
                 """
                         History size : 6
-                        Deposit transaction : +10,00€
-                        Deposit transaction : +10,50€
-                        Deposit transaction : +20,23€
-                        Withdraw transaction : -5,19€
-                        Withdraw transaction : -10,08€
-                        Deposit transaction : +10,94€""",
+                        Transaction : 10,00€
+                        Transaction : 10,50€
+                        Transaction : 20,23€
+                        Transaction : -5,19€
+                        Transaction : -10,08€
+                        Transaction : 10,94€""",
                 history.toString());
     }
 }

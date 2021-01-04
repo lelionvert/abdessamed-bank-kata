@@ -79,4 +79,8 @@ public class Money implements Comparable<Money> {
         decimalFormat.setGroupingUsed(false);
         return decimalFormat;
     }
+
+    public Money opposite() {
+        return oppositeOf(this);
+    }
 }

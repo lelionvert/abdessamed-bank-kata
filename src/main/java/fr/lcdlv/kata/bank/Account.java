@@ -17,7 +17,11 @@ public class Account {
             throw new MinimumMoneyAllowedException();
         }
         balance = balance.add(money);
-        Transaction transaction = new DepositTransaction(money);
+        recordDepositTransaction(money);
+    }
+
+    private void recordDepositTransaction(Money money) {
+        Transaction transaction = new Transaction(money);
         history.record(transaction);
     }
 
@@ -30,7 +34,7 @@ public class Account {
             throw new OverdraftException();
         }
         balance = balance.subtract(money);
-        Transaction transaction = new WithdrawTransaction(money);
+        Transaction transaction = new Transaction(money.opposite());
         history.record(transaction);
     }
 

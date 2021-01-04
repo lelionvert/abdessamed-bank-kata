@@ -78,11 +78,11 @@ public class Specification {
         }
 
         private Transaction withdrawTransaction(Money amount) {
-            return new WithdrawTransaction(amount);
+            return new Transaction(amount.opposite());
         }
 
         private Transaction depositTransaction(Money amount) {
-            return new DepositTransaction(amount);
+            return new Transaction(amount);
         }
     }
 
