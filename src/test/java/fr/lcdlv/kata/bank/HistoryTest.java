@@ -46,6 +46,15 @@ public class HistoryTest {
     }
 
     @Test
+    public void sumEmptyHistory() {
+        History history = new History();
+
+        Money actual = history.sum();
+
+        Assertions.assertEquals(Money.of(0), actual);
+    }
+
+    @Test
     public void toStringHistory() {
         History history = new History();
 

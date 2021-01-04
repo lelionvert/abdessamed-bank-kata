@@ -38,4 +38,8 @@ public class History {
                 .map(Transaction::toString)
                 .collect(joining("\n"));
     }
+
+    public Money sum() {
+        return Money.of(0);
+    }
 }
