@@ -65,4 +65,8 @@ public class Money implements Comparable<Money> {
     public boolean isLessThan(Money other) {
         return compareTo(other) < 0;
     }
+
+    public boolean isLessThanOrEqualTo(Money other) {
+        return false;
+    }
 }

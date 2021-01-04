@@ -70,4 +70,14 @@ public class MoneyTest {
 
         assertTrue(isLessThanOrEqualTo);
     }
+
+    @Test
+    public void isLessThanOrEqualToShouldReturnTrue() {
+        Money one = Money.of(1);
+        Money two = Money.of(2);
+
+        boolean isLessThanOrEqualTo = one.isLessThanOrEqualTo(two);
+
+        assertTrue(isLessThanOrEqualTo);
+    }
 }
