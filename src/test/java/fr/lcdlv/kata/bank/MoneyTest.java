@@ -15,4 +15,13 @@ public class MoneyTest {
 
         assertEquals(one, anotherOne);
     }
+
+    @Test
+    public void isEqualToAnotherAmountOfMoney() {
+        Money one = Money.of(1);
+
+        Money two = Money.of(2);
+
+        assertNotEquals(one, two);
+    }
 }
