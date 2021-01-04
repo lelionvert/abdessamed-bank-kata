@@ -2,6 +2,7 @@ package fr.lcdlv.kata.bank;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Money implements Comparable<Money> {
@@ -37,7 +38,15 @@ public class Money implements Comparable<Money> {
 
     @Override
     public String toString() {
-        return value.toString();
+        return decimalFormatter().format(value);
+    }
+
+    private DecimalFormat decimalFormatter() {
+        DecimalFormat decimalFormat = new DecimalFormat("##,##€");
+        decimalFormat.setMaximumFractionDigits(2);
+        decimalFormat.setMinimumIntegerDigits(2);
+        decimalFormat.setGroupingUsed(false);
+        return decimalFormat;
     }
 
     public Money add(Money other) {
