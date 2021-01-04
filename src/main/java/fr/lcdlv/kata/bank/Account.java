@@ -6,6 +6,6 @@ public class Account {
     }
 
     public Money getBalance() {
-        return null;
+        return Money.of(0);
     }
 }
