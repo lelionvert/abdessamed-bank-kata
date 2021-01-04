@@ -39,7 +39,13 @@ public class Money implements Comparable<Money> {
     }
 
     public Money add(Money other) {
-        return Money.of(value.add(other.value));
+        BigDecimal sum = value.add(other.value);
+        return Money.of(sum);
+    }
+
+    public Money subtract(Money other) {
+        BigDecimal subtracted = value.subtract(other.value);
+        return Money.of(subtracted);
     }
 
     public int compareTo(Money other) {
@@ -52,9 +58,5 @@ public class Money implements Comparable<Money> {
 
     public boolean isLessThan(Money other) {
         return compareTo(other) < 0;
-    }
-
-    public Money subtract(Money other) {
-        return Money.of(value.subtract(other.value));
     }
 }
