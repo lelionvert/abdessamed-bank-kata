@@ -46,7 +46,11 @@ public class Money implements Comparable<Money> {
         return value.compareTo(other.value);
     }
 
-    public boolean isBiggerThanOrEquals(Money other) {
+    public boolean isBiggerThanOrEqualTo(Money other) {
         return compareTo(other) >= 0;
+    }
+
+    public boolean isLessThan(Money other) {
+        return compareTo(other) < 0;
     }
 }

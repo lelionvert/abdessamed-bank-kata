@@ -1,6 +1,5 @@
 package fr.lcdlv.kata.bank;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,12 +43,22 @@ public class MoneyTest {
     }
 
     @Test
+    public void isBiggerThanOrEqualToShouldReturnTrue() {
+        Money one = Money.of(1);
+        Money two = Money.of(2);
+
+        boolean isBiggerOrEqual = two.isBiggerThanOrEqualTo(one);
+
+        assertTrue(isBiggerOrEqual);
+    }
+
+    @Test
     public void isBiggerThanShouldReturnTrue() {
         Money one = Money.of(1);
         Money two = Money.of(2);
 
-        boolean isBiggerOrEqual = two.isBiggerThanOrEquals(one);
+        boolean isLessThanOrEqualTo = one.isLessThan(two);
 
-        assertTrue(isBiggerOrEqual);
+        assertTrue(isLessThanOrEqualTo);
     }
 }
