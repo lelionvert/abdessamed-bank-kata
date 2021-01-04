@@ -5,10 +5,11 @@ public class Account {
     public static final Money MINIMUM_MONEY_ALLOWED = Money.of(0.01);
 
     private Money balance;
+    private History history;
 
-    public Account(Money balance) {
-
+    public Account(Money balance, History history) {
         this.balance = balance;
+        this.history = history;
     }
 
     public void deposit(Money money) throws MinimumMoneyAllowedException {
@@ -16,6 +17,8 @@ public class Account {
             throw new MinimumMoneyAllowedException();
         }
         balance = balance.add(money);
+        Transaction transaction = new DepositTransaction(money);
+        history.record(transaction);
     }
 
     private boolean isAllowed(Money money) {
@@ -27,6 +30,8 @@ public class Account {
             throw new OverdraftException();
         }
         balance = balance.subtract(money);
+        Transaction transaction = new WithdrawTransaction(money);
+        history.record(transaction);
     }
 
     private boolean isOverdraft(Money money) {
@@ -38,6 +43,6 @@ public class Account {
     }
 
     public History getHistory() {
-        return null;
+        return history;
     }
 }

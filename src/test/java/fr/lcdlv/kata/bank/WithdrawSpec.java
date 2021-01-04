@@ -9,7 +9,7 @@ public class WithdrawSpec {
 
     @Test
     public void withdrawWithoutOverdraft() throws OverdraftException {
-        Account account = new Account(Money.of(50));
+        Account account = new Account(Money.of(50), new History());
 
         account.withdraw(Money.of(10));
 
@@ -19,7 +19,7 @@ public class WithdrawSpec {
 
     @Test
     public void withdrawWithOverdraft() {
-        Account account = new Account(Money.of(0));
+        Account account = new Account(Money.of(0), new History());
 
         assertThrows(OverdraftException.class, () -> account.withdraw(Money.of(10)));
     }

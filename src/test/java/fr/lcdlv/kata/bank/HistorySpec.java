@@ -8,7 +8,7 @@ public class HistorySpec {
 
     @Test
     public void transactionHistoryAfterOperations() throws MinimumMoneyAllowedException, OverdraftException {
-        Account account = new Account(Money.of(0));
+        Account account = new Account(Money.of(0), new History());
 
         account.deposit(Money.of(10));
         account.deposit(Money.of(15));

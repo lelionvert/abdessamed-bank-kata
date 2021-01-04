@@ -7,7 +7,7 @@ public class BalanceSpec {
 
     @Test
     public void getBalanceInReadableForm() {
-        Account account = new Account(Money.of(157.83));
+        Account account = new Account(Money.of(157.83), new History());
 
         Money balance = account.getBalance();
 
