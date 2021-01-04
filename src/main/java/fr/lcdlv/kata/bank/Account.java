@@ -25,4 +25,8 @@ public class Account {
     public Money getBalance() {
         return balance;
     }
+
+    public void withdraw(Money money) {
+
+    }
 }
