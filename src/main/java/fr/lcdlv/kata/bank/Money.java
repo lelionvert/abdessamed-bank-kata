@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Money implements Comparable<Money> {
 
+    public static final BigDecimal MINUS_ONE = BigDecimal.valueOf(-1);
     private BigDecimal value;
 
     public Money(BigDecimal value) {
@@ -44,8 +45,12 @@ public class Money implements Comparable<Money> {
     }
 
     public Money subtract(Money other) {
-        BigDecimal subtracted = value.subtract(other.value);
-        return Money.of(subtracted);
+        return add(oppositeOf(other));
+    }
+
+    private Money oppositeOf(Money other) {
+        BigDecimal oppositeValue = other.value.multiply(MINUS_ONE);
+        return Money.of(oppositeValue);
     }
 
     public int compareTo(Money other) {
