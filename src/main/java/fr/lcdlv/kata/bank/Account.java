@@ -27,10 +27,9 @@ public class Account {
     }
 
     public void withdraw(Money money) throws OverdraftException {
-        if(balance.isBiggerThanOrEqualTo(money)) {
-            balance = balance.subtract(money);
-            return;
+        if(money.isLessThanOrEqualTo(balance)) {
+            throw new OverdraftException();
         }
-        throw new OverdraftException();
+        balance = balance.subtract(money);
     }
 }
