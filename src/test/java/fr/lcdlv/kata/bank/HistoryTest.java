@@ -13,4 +13,14 @@ public class HistoryTest {
 
         Assertions.assertEquals(0, size);
     }
+
+    @Test
+    public void recordShouldAddTransactionToHistorySize() {
+        History history = new History();
+        Transaction transaction = new DummyTransaction();
+
+        history.record(transaction);
+
+        Assertions.assertEquals(1, history.size());
+    }
 }
