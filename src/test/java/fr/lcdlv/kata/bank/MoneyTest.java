@@ -45,8 +45,9 @@ public class MoneyTest {
     @Test
     public void compareToEquivalentMoney() {
         Money one = Money.of(1);
+        Money anotherOne = Money.of(1);
 
-        int c = one.compareTo(one);
+        int c = one.compareTo(anotherOne);
 
         assertEquals(0, c);
     }
