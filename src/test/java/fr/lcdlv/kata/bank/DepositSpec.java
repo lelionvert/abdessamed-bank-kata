@@ -15,12 +15,4 @@ public class DepositSpec {
         Money balance = account.getBalance();
         Assertions.assertEquals(Money.of(1), balance);
     }
-
-    @Test
-    public void depositMoneyOnAccountWithMoneyUnderMinimum() {
-        Money money = Money.of(0);
-        Account account = new Account(Money.of(0));
-
-        Assertions.assertThrows(MinimumMoneyException.class, () -> account.deposit(money));
-    }
 }
