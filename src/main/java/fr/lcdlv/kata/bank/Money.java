@@ -9,9 +9,7 @@ public class Money implements Comparable<Money> {
     private BigDecimal value;
 
     public Money(BigDecimal value) {
-        BigDecimal scaledValue = value.setScale(2, RoundingMode.HALF_EVEN);
-
-        this.value = scaledValue;
+        this.value = value.setScale(2, RoundingMode.HALF_EVEN);
     }
 
     public static Money of(double money) {
@@ -23,10 +21,10 @@ public class Money implements Comparable<Money> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Money money = (Money) o;
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        Money money = (Money) other;
         return Objects.equals(value, money.value);
     }
 
@@ -40,8 +38,8 @@ public class Money implements Comparable<Money> {
         return value.toString();
     }
 
-    public Money add(Money money) {
-        return Money.of(value.add(money.value));
+    public Money add(Money other) {
+        return Money.of(value.add(other.value));
     }
 
     public int compareTo(Money other) {
