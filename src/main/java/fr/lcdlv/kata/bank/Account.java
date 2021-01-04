@@ -11,9 +11,9 @@ public class Account {
         this.balance = balance;
     }
 
-    public void deposit(Money money) throws MinimumMoneyException {
+    public void deposit(Money money) throws MinimumMoneyAllowedException {
         if(isMinimumMoneyAllowedRespected(money)) {
-            throw new MinimumMoneyException();
+            throw new MinimumMoneyAllowedException();
         }
         balance = balance.add(money);
     }
