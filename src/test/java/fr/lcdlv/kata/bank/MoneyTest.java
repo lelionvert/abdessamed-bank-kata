@@ -34,6 +34,15 @@ public class MoneyTest {
     }
 
     @Test
+    public void subtractMoney() {
+        Money one = Money.of(1);
+
+        Money zero = one.subtract(one);
+
+        assertEquals(Money.of(0), zero);
+    }
+
+    @Test
     public void compareToEquivalentMoney() {
         Money one = Money.of(1);
 

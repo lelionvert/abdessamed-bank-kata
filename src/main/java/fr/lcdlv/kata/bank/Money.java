@@ -53,4 +53,8 @@ public class Money implements Comparable<Money> {
     public boolean isLessThan(Money other) {
         return compareTo(other) < 0;
     }
+
+    public Money subtract(Money other) {
+        return Money.of(value.subtract(other.value));
+    }
 }
