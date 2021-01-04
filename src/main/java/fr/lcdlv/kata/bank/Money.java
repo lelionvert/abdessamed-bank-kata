@@ -23,33 +23,6 @@ public class Money implements Comparable<Money> {
         return new Money(money);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (other == null || getClass() != other.getClass()) return false;
-        Money money = (Money) other;
-        return Objects.equals(value, money.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
-    @Override
-    public String toString() {
-        return decimalFormatter().format(value);
-    }
-
-    private DecimalFormat decimalFormatter() {
-        DecimalFormat decimalFormat = new DecimalFormat("##,##€");
-        decimalFormat.setMaximumFractionDigits(2);
-        decimalFormat.setMinimumFractionDigits(2);
-        decimalFormat.setMinimumIntegerDigits(1);
-        decimalFormat.setGroupingUsed(false);
-        return decimalFormat;
-    }
-
     public Money add(Money other) {
         BigDecimal sum = value.add(other.value);
         return Money.of(sum);
@@ -78,5 +51,32 @@ public class Money implements Comparable<Money> {
 
     public boolean isLessThanOrEqualTo(Money other) {
         return compareTo(other) <= 0;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        Money money = (Money) other;
+        return Objects.equals(value, money.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return decimalFormatter().format(value);
+    }
+
+    private DecimalFormat decimalFormatter() {
+        DecimalFormat decimalFormat = new DecimalFormat("##,##€");
+        decimalFormat.setMaximumFractionDigits(2);
+        decimalFormat.setMinimumFractionDigits(2);
+        decimalFormat.setMinimumIntegerDigits(1);
+        decimalFormat.setGroupingUsed(false);
+        return decimalFormat;
     }
 }
