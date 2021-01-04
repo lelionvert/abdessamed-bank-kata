@@ -17,7 +17,7 @@ public class DepositSpec {
     }
 
     @Test
-    public void depositAmountOfMoneyUnderMinimumAllowedOnAccount() {
+    public void depositMoneyUnderMinimumAllowedOnAccount() {
         Money money = Money.of(0);
         Account account = new Account(Money.of(0));
 
