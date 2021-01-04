@@ -23,4 +23,25 @@ public class HistoryTest {
 
         Assertions.assertEquals(1, history.size());
     }
+
+    @Test
+    public void equalsWithAnEqualHistoryShouldReturnTrue() {
+        History history = new History();
+        Transaction transaction = new ReturnTrueOnEqualsStubTransaction();
+
+        history.record(transaction);
+        history.record(transaction);
+
+        Assertions.assertEquals(expectedHistory(), history);
+    }
+
+    private History expectedHistory() {
+        History history = new History();
+        Transaction transaction = new ReturnTrueOnEqualsStubTransaction();
+
+        history.record(transaction);
+        history.record(transaction);
+
+        return history;
+    }
 }
