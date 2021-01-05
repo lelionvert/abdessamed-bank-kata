@@ -35,6 +35,20 @@ public class Specification {
         }
 
         @Test
+        public void depositManyMoneyOnAccount() throws MinimumMoneyAllowedException {
+            Money money = Money.of(1);
+            Account account = new Account(Money.of(0), new Transactions());
+
+            account.deposit(money);
+            account.deposit(money);
+            account.deposit(money);
+            account.deposit(money);
+
+            Money balance = account.getBalance();
+            Assertions.assertEquals(Money.of(4), balance);
+        }
+
+        @Test
         public void depositMoneyUnderMinimumAllowedOnAccount() {
             Money money = Money.of(0);
             Account account = new Account(Money.of(0), new Transactions());
