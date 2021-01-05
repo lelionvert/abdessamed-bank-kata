@@ -11,7 +11,7 @@ public class Specification {
     @Nested
     public class BalanceSpec {
         @Test
-        public void getBalanceInReadableForm() {
+        public void getBalance() {
             Account account = AccountFactory.wrap(Money.of(157.83));
 
             Money balance = account.getBalance();
