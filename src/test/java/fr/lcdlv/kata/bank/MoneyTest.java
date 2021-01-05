@@ -99,6 +99,6 @@ public class MoneyTest {
 
         String actual = money.toString();
 
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

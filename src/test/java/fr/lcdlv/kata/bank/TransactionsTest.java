@@ -3,6 +3,8 @@ package fr.lcdlv.kata.bank;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class TransactionsTest {
 
     @Test
@@ -11,7 +13,7 @@ public class TransactionsTest {
 
         int size = transactions.size();
 
-        Assertions.assertEquals(0, size);
+        assertEquals(0, size);
     }
 
     @Test
@@ -21,7 +23,7 @@ public class TransactionsTest {
 
         transactions.record(transaction);
 
-        Assertions.assertEquals(1, transactions.size());
+        assertEquals(1, transactions.size());
     }
 
     @Test
@@ -32,7 +34,7 @@ public class TransactionsTest {
         transactions.record(transaction);
         transactions.record(transaction);
 
-        Assertions.assertEquals(expectedTransactions(), transactions);
+        assertEquals(expectedTransactions(), transactions);
     }
 
     private Transactions expectedTransactions() {
@@ -51,7 +53,7 @@ public class TransactionsTest {
 
         Money zero = transactions.sum();
 
-        Assertions.assertEquals(Money.ZERO, zero);
+        assertEquals(Money.ZERO, zero);
     }
 
     @Test
@@ -60,7 +62,7 @@ public class TransactionsTest {
 
         Money sixty = transactions.sum();
 
-        Assertions.assertEquals(Money.of(60), sixty);
+        assertEquals(Money.of(60), sixty);
     }
 
     @Test
@@ -74,7 +76,7 @@ public class TransactionsTest {
         transactions.record(new WithdrawTransaction(Money.of(10.08)));
         transactions.record(new DepositTransaction(Money.of(10.943)));
 
-        Assertions.assertEquals(
+        assertEquals(
                 """
                         Transactions : 6
                         Transaction : 10,00€

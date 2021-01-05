@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -17,7 +18,7 @@ public class Specification {
 
             Money balance = account.getBalance();
 
-            Assertions.assertEquals("157,83€", balance.toString());
+            assertEquals("157,83€", balance.toString());
         }
     }
 
@@ -31,7 +32,7 @@ public class Specification {
             account.deposit(money);
 
             Money balance = account.getBalance();
-            Assertions.assertEquals(Money.of(1), balance);
+            assertEquals(Money.of(1), balance);
         }
 
         @Test
@@ -45,14 +46,14 @@ public class Specification {
             account.deposit(money);
 
             Money balance = account.getBalance();
-            Assertions.assertEquals(Money.of(4), balance);
+            assertEquals(Money.of(4), balance);
         }
 
         @Test
         public void depositMoneyUnderMinimumAllowedOnAccount() {
             Account account = AccountFactory.empty();
 
-            Assertions.assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.ZERO));
+            assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.ZERO));
         }
     }
 

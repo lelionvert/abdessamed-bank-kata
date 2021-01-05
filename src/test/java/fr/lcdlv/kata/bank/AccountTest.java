@@ -3,6 +3,8 @@ package fr.lcdlv.kata.bank;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class AccountTest {
 
     @Test
@@ -11,7 +13,7 @@ public class AccountTest {
 
         Money balance = account.getBalance();
 
-        Assertions.assertEquals(Money.of(1), balance);
+        assertEquals(Money.of(1), balance);
     }
 
     @Test
@@ -21,13 +23,13 @@ public class AccountTest {
         account.deposit(Money.of(1));
 
         Money balance = account.getBalance();
-        Assertions.assertEquals(Money.of(1), balance);
+        assertEquals(Money.of(1), balance);
     }
 
     @Test
     public void depositMoneyUnderMinimumAllowedShouldThrowMinimumMoneyAllowedException() {
         Account account = AccountFactory.empty();
 
-        Assertions.assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.ZERO));
+        assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.ZERO));
     }
 }
