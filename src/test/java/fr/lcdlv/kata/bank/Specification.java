@@ -24,10 +24,9 @@ public class Specification {
     public class DepositSpec {
         @Test
         public void depositMoneyOnAccount() throws MinimumMoneyAllowedException {
-            Money money = Money.of(1);
             Account account = AccountFactory.empty();
 
-            account.deposit(money);
+            account.deposit(Money.of(1));
 
             Money balance = account.getBalance();
             assertEquals(Money.of(1), balance);
@@ -35,13 +34,12 @@ public class Specification {
 
         @Test
         public void depositMuchMoneyOnAccount() throws MinimumMoneyAllowedException {
-            Money money = Money.of(1);
             Account account = AccountFactory.empty();
 
-            account.deposit(money);
-            account.deposit(money);
-            account.deposit(money);
-            account.deposit(money);
+            account.deposit(Money.of(1));
+            account.deposit(Money.of(1));
+            account.deposit(Money.of(1));
+            account.deposit(Money.of(1));
 
             Money balance = account.getBalance();
             assertEquals(Money.of(4), balance);
