@@ -1,8 +1,8 @@
 package fr.lcdlv.kata.bank;
 
 public class WithdrawTransaction extends BaseTransaction {
-    public WithdrawTransaction(Money money) {
-        super(money);
+    public WithdrawTransaction(Money amount) {
+        super(amount);
     }
 
     @Override
