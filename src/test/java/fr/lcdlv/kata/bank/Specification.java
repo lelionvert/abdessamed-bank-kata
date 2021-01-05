@@ -44,6 +44,26 @@ public class Specification {
     }
 
     @Nested
+    public class WithdrawSpec {
+        @Test
+        public void withdrawWithoutOverdraft() throws OverdraftException {
+            Account account = new Account(Money.of(50), new Transactions());
+
+            account.withdraw(Money.of(10));
+
+            Money balance = account.getBalance();
+            assertEquals(balance, Money.of(40));
+        }
+
+        @Test
+        public void withdrawWithOverdraft() {
+            Account account = new Account(Money.of(0), new Transactions());
+
+            assertThrows(OverdraftException.class, () -> account.withdraw(Money.of(10)));
+        }
+    }
+
+    @Nested
     public class TransactionsSpec {
         @Test
         public void transactionHistoryAfterOperations() throws MinimumMoneyAllowedException, OverdraftException {
@@ -86,23 +106,4 @@ public class Specification {
         }
     }
 
-    @Nested
-    public class WithdrawSpec {
-        @Test
-        public void withdrawWithoutOverdraft() throws OverdraftException {
-            Account account = new Account(Money.of(50), new Transactions());
-
-            account.withdraw(Money.of(10));
-
-            Money balance = account.getBalance();
-            assertEquals(balance, Money.of(40));
-        }
-
-        @Test
-        public void withdrawWithOverdraft() {
-            Account account = new Account(Money.of(0), new Transactions());
-
-            assertThrows(OverdraftException.class, () -> account.withdraw(Money.of(10)));
-        }
-    }
 }
