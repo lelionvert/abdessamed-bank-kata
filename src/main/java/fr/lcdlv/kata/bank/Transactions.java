@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import static java.util.stream.Collectors.joining;
 
-public class History {
+public class Transactions {
 
     List<Transaction> transactions = new ArrayList<>();
 
@@ -22,8 +22,8 @@ public class History {
     public boolean equals(Object other) {
         if (this == other) return true;
         if (other == null || getClass() != other.getClass()) return false;
-        History history = (History) other;
-        return transactions.equals(history.transactions);
+        Transactions transactions = (Transactions) other;
+        return this.transactions.equals(transactions.transactions);
     }
 
     @Override

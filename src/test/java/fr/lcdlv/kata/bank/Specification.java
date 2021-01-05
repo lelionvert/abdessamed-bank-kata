@@ -13,7 +13,7 @@ public class Specification {
     public class BalanceSpec {
         @Test
         public void getBalanceInReadableForm() {
-            Account account = new Account(Money.of(157.83), new History());
+            Account account = new Account(Money.of(157.83), new Transactions());
 
             Money balance = account.getBalance();
 
@@ -26,7 +26,7 @@ public class Specification {
         @Test
         public void depositMoneyOnAccount() throws MinimumMoneyAllowedException {
             Money money = Money.of(1);
-            Account account = new Account(Money.of(0), new History());
+            Account account = new Account(Money.of(0), new Transactions());
 
             account.deposit(money);
 
@@ -37,17 +37,17 @@ public class Specification {
         @Test
         public void depositMoneyUnderMinimumAllowedOnAccount() {
             Money money = Money.of(0);
-            Account account = new Account(Money.of(0), new History());
+            Account account = new Account(Money.of(0), new Transactions());
 
             Assertions.assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(money));
         }
     }
 
     @Nested
-    public class HistorySpec {
+    public class TransactionsSpec {
         @Test
         public void transactionHistoryAfterOperations() throws MinimumMoneyAllowedException, OverdraftException {
-            Account account = new Account(Money.of(0), new fr.lcdlv.kata.bank.History());
+            Account account = new Account(Money.of(0), new Transactions());
 
             account.deposit(Money.of(10));
             account.deposit(Money.of(15));
@@ -56,25 +56,25 @@ public class Specification {
             account.deposit(Money.of(20));
             account.withdraw(Money.of(30));
 
-            fr.lcdlv.kata.bank.History history = account.getHistory();
+            Transactions transactions = account.getHistory();
 
-            int transactionNumber = history.size();
+            int transactionNumber = transactions.size();
             assertEquals(6, transactionNumber);
 
-            assertEquals(expectedHistory(), history);
+            assertEquals(expectedHistory(), transactions);
         }
 
-        private fr.lcdlv.kata.bank.History expectedHistory() {
-            fr.lcdlv.kata.bank.History history = new fr.lcdlv.kata.bank.History();
+        private Transactions expectedHistory() {
+            Transactions transactions = new Transactions();
 
-            history.record(depositTransaction(Money.of(10)));
-            history.record(depositTransaction(Money.of(15)));
-            history.record(depositTransaction(Money.of(20)));
-            history.record(withdrawTransaction(Money.of(20)));
-            history.record(depositTransaction(Money.of(20)));
-            history.record(withdrawTransaction(Money.of(30)));
+            transactions.record(depositTransaction(Money.of(10)));
+            transactions.record(depositTransaction(Money.of(15)));
+            transactions.record(depositTransaction(Money.of(20)));
+            transactions.record(withdrawTransaction(Money.of(20)));
+            transactions.record(depositTransaction(Money.of(20)));
+            transactions.record(withdrawTransaction(Money.of(30)));
 
-            return history;
+            return transactions;
         }
 
         private Transaction withdrawTransaction(Money amount) {
@@ -90,7 +90,7 @@ public class Specification {
     public class WithdrawSpec {
         @Test
         public void withdrawWithoutOverdraft() throws OverdraftException {
-            Account account = new Account(Money.of(50), new History());
+            Account account = new Account(Money.of(50), new Transactions());
 
             account.withdraw(Money.of(10));
 
@@ -100,7 +100,7 @@ public class Specification {
 
         @Test
         public void withdrawWithOverdraft() {
-            Account account = new Account(Money.of(0), new History());
+            Account account = new Account(Money.of(0), new Transactions());
 
             assertThrows(OverdraftException.class, () -> account.withdraw(Money.of(10)));
         }

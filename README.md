@@ -34,7 +34,7 @@ Your repository should have:
 > As a bank, a customer can display its account balance
 
 #### User Story 4
-> As a bank, a customer can display its account transactions history
+> As a bank, a customer can display its account transactions transactions
 
 ### Bonus features
 The below features are optional and non-exhaustive.  
