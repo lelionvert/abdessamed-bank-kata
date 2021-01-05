@@ -3,6 +3,7 @@ package fr.lcdlv.kata.bank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import static java.util.stream.Collectors.joining;
 
@@ -19,11 +20,9 @@ public class Transactions {
     }
 
     public Money sum() {
-        Money money = Money.of(0);
-        for (Transaction transaction : transactions) {
-            money = transaction.applyOn(money);
-        }
-        return money;
+        return transactions.stream()
+                .map((t) -> t.applyOn(Money.of(0)))
+                .reduce(Money.of(0), Money::add);
     }
 
     @Override
