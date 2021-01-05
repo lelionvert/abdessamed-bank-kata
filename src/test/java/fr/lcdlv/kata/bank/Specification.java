@@ -70,6 +70,19 @@ public class Specification {
         }
 
         @Test
+        public void withdrawMuchMoneyWithoutOverdraft() throws OverdraftException {
+            Account account = new Account(Money.of(50), new Transactions());
+
+            account.withdraw(Money.of(10));
+            account.withdraw(Money.of(10));
+            account.withdraw(Money.of(10));
+            account.withdraw(Money.of(10));
+
+            Money balance = account.getBalance();
+            assertEquals(balance, Money.of(10));
+        }
+
+        @Test
         public void withdrawWithOverdraft() {
             Account account = new Account(Money.of(0), new Transactions());
 
