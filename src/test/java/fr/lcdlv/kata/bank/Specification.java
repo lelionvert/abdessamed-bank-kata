@@ -95,19 +95,25 @@ public class Specification {
         public void transactionsAfterOperations() throws MinimumMoneyAllowedException, OverdraftException {
             Account account = AccountFactory.empty();
 
+            actOnAccount(account);
+
+            assertAccount(account);
+        }
+
+        private void assertAccount(Account account) {
+            Transactions transactions = account.getTransactions();
+            int transactionNumber = transactions.size();
+            assertEquals(6, transactionNumber);
+            assertEquals(expectedTransactions(), transactions);
+        }
+
+        private void actOnAccount(Account account) throws MinimumMoneyAllowedException, OverdraftException {
             account.deposit(Money.of(10));
             account.deposit(Money.of(15));
             account.deposit(Money.of(20));
             account.withdraw(Money.of(20));
             account.deposit(Money.of(20));
             account.withdraw(Money.of(30));
-
-            Transactions transactions = account.getTransactions();
-
-            int transactionNumber = transactions.size();
-            assertEquals(6, transactionNumber);
-
-            assertEquals(expectedTransactions(), transactions);
         }
 
         private Transactions expectedTransactions() {
