@@ -9,7 +9,7 @@ public class Money implements Comparable<Money> {
 
     private static final BigDecimal MINUS_ONE = BigDecimal.valueOf(-1).setScale(2, RoundingMode.HALF_EVEN);
 
-    private BigDecimal value;
+    private final BigDecimal value;
 
     public Money(BigDecimal value) {
         this.value = value.setScale(2, RoundingMode.HALF_EVEN);
