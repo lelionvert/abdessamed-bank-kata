@@ -21,8 +21,8 @@ public class Transactions {
 
     public Money sum() {
         return transactions.stream()
-                .map((t) -> t.applyOn(Money.of(0)))
-                .reduce(Money.of(0), Money::add);
+                .map((t) -> t.applyOn(Money.ZERO))
+                .reduce(Money.ZERO, Money::add);
     }
 
     @Override

@@ -3,12 +3,12 @@ package fr.lcdlv.kata.bank;
 public class ReturnTrueOnEqualsStubBaseTransaction extends BaseTransaction {
 
     public ReturnTrueOnEqualsStubBaseTransaction() {
-        super(Money.of(0));
+        super(Money.ZERO);
     }
 
     @Override
     public Money applyOn(Money money) {
-        return Money.of(0);
+        return Money.ZERO;
     }
 
     @Override

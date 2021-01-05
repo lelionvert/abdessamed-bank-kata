@@ -17,7 +17,7 @@ public class TransactionsTest {
     @Test
     public void recordShouldAddTransactionToTransactionsSize() {
         Transactions transactions = new Transactions();
-        BaseTransaction baseTransaction = new DepositTransaction(Money.of(0));
+        BaseTransaction baseTransaction = new DepositTransaction(Money.ZERO);
 
         transactions.record(baseTransaction);
 
@@ -51,7 +51,7 @@ public class TransactionsTest {
 
         Money zero = transactions.sum();
 
-        Assertions.assertEquals(Money.of(0), zero);
+        Assertions.assertEquals(Money.ZERO, zero);
     }
 
     @Test

@@ -42,7 +42,7 @@ public class MoneyTest {
 
         Money zero = one.subtract(one);
 
-        assertEquals(Money.of(0), zero);
+        assertEquals(Money.ZERO, zero);
     }
 
     @Test

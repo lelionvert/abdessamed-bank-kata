@@ -28,6 +28,6 @@ public class AccountTest {
     public void depositMoneyUnderMinimumAllowedShouldThrowMinimumMoneyAllowedException() {
         Account account = AccountFactory.empty();
 
-        Assertions.assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.of(0)));
+        Assertions.assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.ZERO));
     }
 }

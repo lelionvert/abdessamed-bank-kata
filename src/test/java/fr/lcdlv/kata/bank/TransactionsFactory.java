@@ -6,7 +6,7 @@ public class TransactionsFactory {
         Transactions transactions = new Transactions();
         for (Money money : monies) {
             Transaction transaction;
-            if(money.isBiggerThanOrEqualTo(Money.of(0))) {
+            if(money.isBiggerThanOrEqualTo(Money.ZERO)) {
                 transaction = new DepositTransaction(money);
             }
             else {

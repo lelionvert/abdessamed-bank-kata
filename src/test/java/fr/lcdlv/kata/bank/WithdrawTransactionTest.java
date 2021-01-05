@@ -25,7 +25,7 @@ public class WithdrawTransactionTest {
         money = withdrawTransaction.applyOn(money);
         money = withdrawTransaction.applyOn(money);
 
-        assertEquals(Money.of(0), money);
+        assertEquals(Money.ZERO, money);
     }
 
     @Test

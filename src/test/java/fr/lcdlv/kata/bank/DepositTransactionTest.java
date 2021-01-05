@@ -11,7 +11,7 @@ public class DepositTransactionTest {
     public void applyOnMoney() {
         Transaction depositTransaction = new DepositTransaction(Money.of(10));
 
-        Money money = depositTransaction.applyOn(Money.of(0));
+        Money money = depositTransaction.applyOn(Money.ZERO);
 
         assertEquals(Money.of(10), money);
     }
@@ -20,7 +20,7 @@ public class DepositTransactionTest {
     public void manyApplyOnMoney() {
         Transaction depositTransaction = new DepositTransaction(Money.of(10));
 
-        Money money = depositTransaction.applyOn(Money.of(0));
+        Money money = depositTransaction.applyOn(Money.ZERO);
         money = depositTransaction.applyOn(money);
         money = depositTransaction.applyOn(money);
         money = depositTransaction.applyOn(money);
