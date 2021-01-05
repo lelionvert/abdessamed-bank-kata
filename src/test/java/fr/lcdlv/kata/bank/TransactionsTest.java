@@ -76,7 +76,7 @@ public class TransactionsTest {
 
         Assertions.assertEquals(
                 """
-                        History size : 6
+                        Transactions : 6
                         Transaction : 10,00€
                         Transaction : 10,50€
                         Transaction : 20,23€

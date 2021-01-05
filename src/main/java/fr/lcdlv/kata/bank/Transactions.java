@@ -40,7 +40,7 @@ public class Transactions {
 
     @Override
     public String toString() {
-        return "History size : " + size() + "\n"
+        return "Transactions : " + size() + "\n"
                 + transactions.stream()
                 .map(Transaction::toString)
                 .collect(joining("\n"));

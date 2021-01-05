@@ -92,7 +92,7 @@ public class Specification {
     @Nested
     public class TransactionsSpec {
         @Test
-        public void transactionHistoryAfterOperations() throws MinimumMoneyAllowedException, OverdraftException {
+        public void transactionsAfterOperations() throws MinimumMoneyAllowedException, OverdraftException {
             Account account = AccountFactory.empty();
 
             account.deposit(Money.of(10));
@@ -107,10 +107,10 @@ public class Specification {
             int transactionNumber = transactions.size();
             assertEquals(6, transactionNumber);
 
-            assertEquals(expectedHistory(), transactions);
+            assertEquals(expectedTransactions(), transactions);
         }
 
-        private Transactions expectedHistory() {
+        private Transactions expectedTransactions() {
             Transactions transactions = new Transactions();
 
             transactions.record(depositTransaction(Money.of(10)));
