@@ -50,10 +50,9 @@ public class Specification {
 
         @Test
         public void depositMoneyUnderMinimumAllowedOnAccount() {
-            Money money = Money.of(0);
             Account account = new Account(Money.of(0), new Transactions());
 
-            Assertions.assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(money));
+            Assertions.assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.of(0)));
         }
     }
 
