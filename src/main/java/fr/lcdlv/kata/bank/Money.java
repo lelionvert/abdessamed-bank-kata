@@ -30,11 +30,11 @@ public class Money implements Comparable<Money> {
     }
 
     public Money subtract(Money other) {
-        return add(oppositeOf(other));
+        return add(other.opposite());
     }
 
-    private Money oppositeOf(Money other) {
-        BigDecimal oppositeValue = other.value.multiply(MINUS_ONE);
+    public Money opposite() {
+        BigDecimal oppositeValue = value.multiply(MINUS_ONE);
         return Money.of(oppositeValue);
     }
 
@@ -79,9 +79,5 @@ public class Money implements Comparable<Money> {
         decimalFormat.setMinimumIntegerDigits(1);
         decimalFormat.setGroupingUsed(false);
         return decimalFormat;
-    }
-
-    public Money opposite() {
-        return oppositeOf(this);
     }
 }
