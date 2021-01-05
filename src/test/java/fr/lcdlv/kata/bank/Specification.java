@@ -35,7 +35,7 @@ public class Specification {
         }
 
         @Test
-        public void depositManyMoneyOnAccount() throws MinimumMoneyAllowedException {
+        public void depositMuchMoneyOnAccount() throws MinimumMoneyAllowedException {
             Money money = Money.of(1);
             Account account = new Account(Money.of(0), new Transactions());
 
