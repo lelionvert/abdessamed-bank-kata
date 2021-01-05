@@ -102,7 +102,7 @@ public class Specification {
             account.deposit(Money.of(20));
             account.withdraw(Money.of(30));
 
-            Transactions transactions = account.getHistory();
+            Transactions transactions = account.getTransactions();
 
             int transactionNumber = transactions.size();
             assertEquals(6, transactionNumber);

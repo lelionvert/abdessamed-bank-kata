@@ -47,7 +47,7 @@ public class Account {
         return transactions.sum();
     }
 
-    public Transactions getHistory() {
+    public Transactions getTransactions() {
         return transactions;
     }
 }
