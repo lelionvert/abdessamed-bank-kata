@@ -18,6 +18,17 @@ public class Transactions {
         transactions.add(transaction);
     }
 
+    public Money sum() {
+        if(!transactions.isEmpty()) {
+            Money money = Money.of(0);
+            for(Transaction transaction : transactions) {
+                money = transaction.applyOn(money);
+            }
+            return money;
+        }
+        return Money.of(0);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) return true;

@@ -13,7 +13,7 @@ public class Specification {
     public class BalanceSpec {
         @Test
         public void getBalanceInReadableForm() {
-            Account account = new Account(Money.of(157.83), new Transactions());
+            Account account = AccountFactory.wrap(Money.of(157.83));
 
             Money balance = account.getBalance();
 
@@ -26,7 +26,7 @@ public class Specification {
         @Test
         public void depositMoneyOnAccount() throws MinimumMoneyAllowedException {
             Money money = Money.of(1);
-            Account account = new Account(Money.of(0), new Transactions());
+            Account account = AccountFactory.empty();
 
             account.deposit(money);
 
@@ -37,7 +37,7 @@ public class Specification {
         @Test
         public void depositMuchMoneyOnAccount() throws MinimumMoneyAllowedException {
             Money money = Money.of(1);
-            Account account = new Account(Money.of(0), new Transactions());
+            Account account = AccountFactory.empty();
 
             account.deposit(money);
             account.deposit(money);
@@ -50,7 +50,7 @@ public class Specification {
 
         @Test
         public void depositMoneyUnderMinimumAllowedOnAccount() {
-            Account account = new Account(Money.of(0), new Transactions());
+            Account account = AccountFactory.empty();
 
             Assertions.assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.of(0)));
         }
@@ -60,7 +60,7 @@ public class Specification {
     public class WithdrawSpec {
         @Test
         public void withdrawWithoutOverdraft() throws OverdraftException {
-            Account account = new Account(Money.of(50), new Transactions());
+            Account account = AccountFactory.wrap(Money.of(50));
 
             account.withdraw(Money.of(10));
 
@@ -70,7 +70,7 @@ public class Specification {
 
         @Test
         public void withdrawMuchMoneyWithoutOverdraft() throws OverdraftException {
-            Account account = new Account(Money.of(50), new Transactions());
+            Account account = AccountFactory.wrap(Money.of(50));
 
             account.withdraw(Money.of(10));
             account.withdraw(Money.of(10));
@@ -83,7 +83,7 @@ public class Specification {
 
         @Test
         public void withdrawWithOverdraft() {
-            Account account = new Account(Money.of(0), new Transactions());
+            Account account = AccountFactory.empty();
 
             assertThrows(OverdraftException.class, () -> account.withdraw(Money.of(10)));
         }
@@ -93,7 +93,7 @@ public class Specification {
     public class TransactionsSpec {
         @Test
         public void transactionHistoryAfterOperations() throws MinimumMoneyAllowedException, OverdraftException {
-            Account account = new Account(Money.of(0), new Transactions());
+            Account account = AccountFactory.empty();
 
             account.deposit(Money.of(10));
             account.deposit(Money.of(15));

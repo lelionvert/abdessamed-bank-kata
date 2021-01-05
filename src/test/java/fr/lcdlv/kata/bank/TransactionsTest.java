@@ -46,6 +46,24 @@ public class TransactionsTest {
     }
 
     @Test
+    public void sumOnEmptyTransactionsShouldReturnZero() {
+        Transactions transactions = new Transactions();
+
+        Money zero = transactions.sum();
+
+        Assertions.assertEquals(Money.of(0), zero);
+    }
+
+    @Test
+    public void sumOnFilledTransactionsShouldReturnTheSumOfAllTransactions() {
+        Transactions transactions = TransactionsFactory.wrap(Money.of(10), Money.of(20), Money.of(30));
+
+        Money sixty = transactions.sum();
+
+        Assertions.assertEquals(Money.of(60), sixty);
+    }
+
+    @Test
     public void transactionsToString() {
         Transactions transactions = new Transactions();
 

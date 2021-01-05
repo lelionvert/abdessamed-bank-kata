@@ -4,11 +4,9 @@ public class Account {
 
     public static final Money MINIMUM_MONEY_ALLOWED = Money.of(0.01);
 
-    private Money balance;
     private Transactions transactions;
 
-    public Account(Money balance, Transactions transactions) {
-        this.balance = balance;
+    public Account(Transactions transactions) {
         this.transactions = transactions;
     }
 
@@ -16,7 +14,6 @@ public class Account {
         if (isAllowed(money)) {
             throw new MinimumMoneyAllowedException();
         }
-        balance = balance.add(money);
         recordDepositTransaction(money);
     }
 
@@ -33,17 +30,17 @@ public class Account {
         if (isOverdraft(money)) {
             throw new OverdraftException();
         }
-        balance = balance.subtract(money);
         BaseTransaction baseTransaction = new WithdrawTransaction(money);
         transactions.record(baseTransaction);
     }
 
     private boolean isOverdraft(Money money) {
+        Money balance = getBalance();
         return money.isBiggerThanOrEqualTo(balance);
     }
 
     public Money getBalance() {
-        return balance;
+        return transactions.sum();
     }
 
     public Transactions getHistory() {

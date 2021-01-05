@@ -7,7 +7,7 @@ public class AccountTest {
 
     @Test
     public void getBalanceShouldReturnCurrentAccountBalance() {
-        Account account = new Account(Money.of(1), new Transactions());
+        Account account = AccountFactory.wrap(Money.of(1));
 
         Money balance = account.getBalance();
 
@@ -16,7 +16,7 @@ public class AccountTest {
 
     @Test
     public void depositMoneyShouldAddMoneyToCurrentBalance() throws MinimumMoneyAllowedException {
-        Account account = new Account(Money.of(0), new Transactions());
+        Account account = AccountFactory.empty();
 
         account.deposit(Money.of(1));
 
@@ -26,9 +26,8 @@ public class AccountTest {
 
     @Test
     public void depositMoneyUnderMinimumAllowedShouldThrowMinimumMoneyAllowedException() {
-        Money money = Money.of(0);
-        Account account = new Account(Money.of(0), new Transactions());
+        Account account = AccountFactory.empty();
 
-        Assertions.assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(money));
+        Assertions.assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.of(0)));
     }
 }
