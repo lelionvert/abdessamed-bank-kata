@@ -17,13 +17,13 @@ public class Account {
         recordDepositTransaction(money);
     }
 
+    private boolean isAllowed(Money money) {
+        return money.isLessThan(MINIMUM_MONEY_ALLOWED);
+    }
+
     private void recordDepositTransaction(Money money) {
         Transaction depositTransaction = new DepositTransaction(money);
         transactions.record(depositTransaction);
-    }
-
-    private boolean isAllowed(Money money) {
-        return money.isLessThan(MINIMUM_MONEY_ALLOWED);
     }
 
     public void withdraw(Money money) throws OverdraftException {
@@ -33,14 +33,14 @@ public class Account {
         recordWithdrawTransaction(money);
     }
 
-    private void recordWithdrawTransaction(Money money) {
-        Transaction withdrawTransaction = new WithdrawTransaction(money);
-        transactions.record(withdrawTransaction);
-    }
-
     private boolean isOverdraft(Money money) {
         Money balance = getBalance();
         return money.isBiggerThanOrEqualTo(balance);
+    }
+
+    private void recordWithdrawTransaction(Money money) {
+        Transaction withdrawTransaction = new WithdrawTransaction(money);
+        transactions.record(withdrawTransaction);
     }
 
     public Money getBalance() {
