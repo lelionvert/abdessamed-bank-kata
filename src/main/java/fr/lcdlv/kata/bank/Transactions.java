@@ -19,14 +19,11 @@ public class Transactions {
     }
 
     public Money sum() {
-        if(!transactions.isEmpty()) {
-            Money money = Money.of(0);
-            for(Transaction transaction : transactions) {
-                money = transaction.applyOn(money);
-            }
-            return money;
+        Money money = Money.of(0);
+        for (Transaction transaction : transactions) {
+            money = transaction.applyOn(money);
         }
-        return Money.of(0);
+        return money;
     }
 
     @Override
