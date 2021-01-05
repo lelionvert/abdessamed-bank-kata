@@ -123,12 +123,12 @@ public class Specification {
             return transactions;
         }
 
-        private Transaction withdrawTransaction(Money amount) {
-            return new Transaction(amount.opposite());
+        private BaseTransaction withdrawTransaction(Money amount) {
+            return new WithdrawTransaction(amount);
         }
 
-        private Transaction depositTransaction(Money amount) {
-            return new Transaction(amount);
+        private BaseTransaction depositTransaction(Money amount) {
+            return new DepositTransaction(amount);
         }
     }
 

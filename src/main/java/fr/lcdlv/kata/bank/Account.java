@@ -21,8 +21,8 @@ public class Account {
     }
 
     private void recordDepositTransaction(Money money) {
-        Transaction transaction = new Transaction(money);
-        transactions.record(transaction);
+        BaseTransaction baseTransaction = new DepositTransaction(money);
+        transactions.record(baseTransaction);
     }
 
     private boolean isAllowed(Money money) {
@@ -34,8 +34,8 @@ public class Account {
             throw new OverdraftException();
         }
         balance = balance.subtract(money);
-        Transaction transaction = new Transaction(money.opposite());
-        transactions.record(transaction);
+        BaseTransaction baseTransaction = new WithdrawTransaction(money);
+        transactions.record(baseTransaction);
     }
 
     private boolean isOverdraft(Money money) {

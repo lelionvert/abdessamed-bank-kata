@@ -15,46 +15,46 @@ public class TransactionsTest {
     }
 
     @Test
-    public void recordShouldAddTransactionToHistorySize() {
+    public void recordShouldAddTransactionToTransactionsSize() {
         Transactions transactions = new Transactions();
-        Transaction transaction = new Transaction(Money.of(0));
+        BaseTransaction baseTransaction = new DepositTransaction(Money.of(0));
 
-        transactions.record(transaction);
+        transactions.record(baseTransaction);
 
         Assertions.assertEquals(1, transactions.size());
     }
 
     @Test
-    public void equalsWithAnEqualHistoryShouldReturnTrue() {
+    public void equalsWithAnEqualTransactionsShouldReturnTrue() {
         Transactions transactions = new Transactions();
-        Transaction transaction = new ReturnTrueOnEqualsStubTransaction();
+        BaseTransaction baseTransaction = new ReturnTrueOnEqualsStubBaseTransaction();
 
-        transactions.record(transaction);
-        transactions.record(transaction);
+        transactions.record(baseTransaction);
+        transactions.record(baseTransaction);
 
-        Assertions.assertEquals(expectedHistory(), transactions);
+        Assertions.assertEquals(expectedTransactions(), transactions);
     }
 
-    private Transactions expectedHistory() {
+    private Transactions expectedTransactions() {
         Transactions transactions = new Transactions();
-        Transaction transaction = new ReturnTrueOnEqualsStubTransaction();
+        BaseTransaction baseTransaction = new ReturnTrueOnEqualsStubBaseTransaction();
 
-        transactions.record(transaction);
-        transactions.record(transaction);
+        transactions.record(baseTransaction);
+        transactions.record(baseTransaction);
 
         return transactions;
     }
 
     @Test
-    public void toStringHistory() {
+    public void transactionsToString() {
         Transactions transactions = new Transactions();
 
-        transactions.record(new Transaction(Money.of(10)));
-        transactions.record(new Transaction(Money.of(10.50)));
-        transactions.record(new Transaction(Money.of(20.23)));
-        transactions.record(new Transaction(Money.of(5.19).opposite()));
-        transactions.record(new Transaction(Money.of(10.08).opposite()));
-        transactions.record(new Transaction(Money.of(10.943)));
+        transactions.record(new DepositTransaction(Money.of(10)));
+        transactions.record(new DepositTransaction(Money.of(10.50)));
+        transactions.record(new DepositTransaction(Money.of(20.23)));
+        transactions.record(new WithdrawTransaction(Money.of(5.19)));
+        transactions.record(new WithdrawTransaction(Money.of(10.08)));
+        transactions.record(new DepositTransaction(Money.of(10.943)));
 
         Assertions.assertEquals(
                 """
