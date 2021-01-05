@@ -18,8 +18,8 @@ public class Account {
     }
 
     private void recordDepositTransaction(Money money) {
-        BaseTransaction baseTransaction = new DepositTransaction(money);
-        transactions.record(baseTransaction);
+        Transaction depositTransaction = new DepositTransaction(money);
+        transactions.record(depositTransaction);
     }
 
     private boolean isAllowed(Money money) {
@@ -30,8 +30,12 @@ public class Account {
         if (isOverdraft(money)) {
             throw new OverdraftException();
         }
-        BaseTransaction baseTransaction = new WithdrawTransaction(money);
-        transactions.record(baseTransaction);
+        recordWithdrawTransaction(money);
+    }
+
+    private void recordWithdrawTransaction(Money money) {
+        Transaction withdrawTransaction = new WithdrawTransaction(money);
+        transactions.record(withdrawTransaction);
     }
 
     private boolean isOverdraft(Money money) {

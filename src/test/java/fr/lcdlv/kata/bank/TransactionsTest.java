@@ -17,9 +17,9 @@ public class TransactionsTest {
     @Test
     public void recordShouldAddTransactionToTransactionsSize() {
         Transactions transactions = new Transactions();
-        BaseTransaction baseTransaction = new DepositTransaction(Money.ZERO);
+        Transaction transaction = new DepositTransaction(Money.ZERO);
 
-        transactions.record(baseTransaction);
+        transactions.record(transaction);
 
         Assertions.assertEquals(1, transactions.size());
     }
@@ -27,20 +27,20 @@ public class TransactionsTest {
     @Test
     public void equalsWithAnEqualTransactionsShouldReturnTrue() {
         Transactions transactions = new Transactions();
-        BaseTransaction baseTransaction = new ReturnTrueOnEqualsStubBaseTransaction();
+        Transaction transaction = new ReturnTrueOnEqualsStubTransaction();
 
-        transactions.record(baseTransaction);
-        transactions.record(baseTransaction);
+        transactions.record(transaction);
+        transactions.record(transaction);
 
         Assertions.assertEquals(expectedTransactions(), transactions);
     }
 
     private Transactions expectedTransactions() {
         Transactions transactions = new Transactions();
-        BaseTransaction baseTransaction = new ReturnTrueOnEqualsStubBaseTransaction();
+        Transaction transaction = new ReturnTrueOnEqualsStubTransaction();
 
-        transactions.record(baseTransaction);
-        transactions.record(baseTransaction);
+        transactions.record(transaction);
+        transactions.record(transaction);
 
         return transactions;
     }

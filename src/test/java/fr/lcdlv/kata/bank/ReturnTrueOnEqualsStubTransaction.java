@@ -1,8 +1,8 @@
 package fr.lcdlv.kata.bank;
 
-public class ReturnTrueOnEqualsStubBaseTransaction extends BaseTransaction {
+public class ReturnTrueOnEqualsStubTransaction extends BaseTransaction {
 
-    public ReturnTrueOnEqualsStubBaseTransaction() {
+    public ReturnTrueOnEqualsStubTransaction() {
         super(Money.ZERO);
     }
 

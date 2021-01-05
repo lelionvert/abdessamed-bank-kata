@@ -123,11 +123,11 @@ public class Specification {
             return transactions;
         }
 
-        private BaseTransaction withdrawTransaction(Money amount) {
+        private Transaction withdrawTransaction(Money amount) {
             return new WithdrawTransaction(amount);
         }
 
-        private BaseTransaction depositTransaction(Money amount) {
+        private Transaction depositTransaction(Money amount) {
             return new DepositTransaction(amount);
         }
     }
