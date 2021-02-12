@@ -20,7 +20,7 @@ public class Transactions {
 
     public Money sum() {
         return transactions.stream()
-                .map((t) -> t.applyOn(Money.ZERO))
+                .map(Transaction::amount)
                 .reduce(Money.ZERO, Money::add);
     }
 
