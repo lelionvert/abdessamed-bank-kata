@@ -22,9 +22,4 @@ public abstract class BaseTransaction implements Transaction {
     public int hashCode() {
         return Objects.hash(amount);
     }
-
-    @Override
-    public String toString() {
-        return "Transaction : " + amount;
-    }
 }

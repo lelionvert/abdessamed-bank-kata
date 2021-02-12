@@ -9,4 +9,9 @@ public class DepositTransaction extends BaseTransaction {
     public Money applyOn(Money money) {
         return money.add(amount);
     }
+
+    @Override
+    public String toString() {
+        return "Transaction : " + amount;
+    }
 }
