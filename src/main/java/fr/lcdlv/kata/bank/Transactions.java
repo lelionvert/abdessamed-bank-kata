@@ -8,7 +8,7 @@ import static java.util.stream.Collectors.joining;
 
 public class Transactions {
 
-    List<Transaction> transactions = new ArrayList<>();
+    private final List<Transaction> transactions = new ArrayList<>();
 
     public int size() {
         return transactions.size();
