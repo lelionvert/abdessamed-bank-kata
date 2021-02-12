@@ -27,14 +27,14 @@ public class Account {
     }
 
     public void withdraw(Money money) throws OverdraftException {
-        if (isOverdraft(money)) {
+        if (overdraft(money)) {
             throw new OverdraftException();
         }
         recordWithdrawTransaction(money);
     }
 
-    private boolean isOverdraft(Money money) {
-        Money balance = getBalance();
+    private boolean overdraft(Money money) {
+        Money balance = balance();
         return money.isBiggerThanOrEqualTo(balance);
     }
 
@@ -43,7 +43,7 @@ public class Account {
         transactions.record(withdrawTransaction);
     }
 
-    public Money getBalance() {
+    public Money balance() {
         return transactions.sum();
     }
 

@@ -11,10 +11,10 @@ public class Specification {
     @Nested
     public class BalanceSpec {
         @Test
-        public void getBalance() {
+        public void balance() {
             Account account = AccountFactory.wrap(Money.of(157.83));
 
-            Money balance = account.getBalance();
+            Money balance = account.balance();
 
             assertEquals("157,83€", balance.toString());
         }
@@ -28,7 +28,7 @@ public class Specification {
 
             account.deposit(Money.of(1));
 
-            Money balance = account.getBalance();
+            Money balance = account.balance();
             assertEquals(Money.of(1), balance);
         }
 
@@ -41,7 +41,7 @@ public class Specification {
             account.deposit(Money.of(1));
             account.deposit(Money.of(1));
 
-            Money balance = account.getBalance();
+            Money balance = account.balance();
             assertEquals(Money.of(4), balance);
         }
 
@@ -61,7 +61,7 @@ public class Specification {
 
             account.withdraw(Money.of(10));
 
-            Money balance = account.getBalance();
+            Money balance = account.balance();
             assertEquals(balance, Money.of(40));
         }
 
@@ -74,7 +74,7 @@ public class Specification {
             account.withdraw(Money.of(10));
             account.withdraw(Money.of(10));
 
-            Money balance = account.getBalance();
+            Money balance = account.balance();
             assertEquals(balance, Money.of(10));
         }
 

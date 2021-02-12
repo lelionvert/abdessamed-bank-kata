@@ -8,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class AccountTest {
 
     @Test
-    public void getBalanceShouldReturnCurrentAccountBalance() {
+    public void balanceShouldReturnCurrentAccountBalance() {
         Account account = AccountFactory.wrap(Money.of(1));
 
-        Money balance = account.getBalance();
+        Money balance = account.balance();
 
         assertEquals(Money.of(1), balance);
     }
@@ -22,7 +22,7 @@ public class AccountTest {
 
         account.deposit(Money.of(1));
 
-        Money balance = account.getBalance();
+        Money balance = account.balance();
         assertEquals(Money.of(1), balance);
     }
 
