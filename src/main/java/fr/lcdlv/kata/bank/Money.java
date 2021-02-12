@@ -7,7 +7,8 @@ import java.util.Objects;
 
 public class Money implements Comparable<Money> {
 
-    private static final BigDecimal MINUS_ONE = BigDecimal.valueOf(-1).setScale(2, RoundingMode.HALF_EVEN);
+    private static final BigDecimal MINUS_ONE = BigDecimal.valueOf(-1)
+            .setScale(2, RoundingMode.HALF_EVEN);
     public static final Money ZERO = Money.of(0);
 
     private final BigDecimal value;
