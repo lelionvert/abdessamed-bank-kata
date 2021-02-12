@@ -98,7 +98,7 @@ public class Specification {
         }
 
         private void assertAccount(Account account) {
-            Transactions transactions = account.getTransactions();
+            Transactions transactions = account.transactions();
             int transactionNumber = transactions.size();
             assertEquals(6, transactionNumber);
             assertEquals(expectedTransactions(), transactions);
