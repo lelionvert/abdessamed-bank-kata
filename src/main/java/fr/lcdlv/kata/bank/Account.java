@@ -11,13 +11,13 @@ public class Account {
     }
 
     public void deposit(Money money) throws MinimumMoneyAllowedException {
-        if (isAllowed(money)) {
+        if (notAllowed(money)) {
             throw new MinimumMoneyAllowedException();
         }
         recordDepositTransaction(money);
     }
 
-    private boolean isAllowed(Money money) {
+    private boolean notAllowed(Money money) {
         return money.isLessThan(MINIMUM_MONEY_ALLOWED);
     }
 
