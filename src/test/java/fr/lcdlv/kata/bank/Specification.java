@@ -131,9 +131,7 @@ public class Specification {
             Account toAccount = AccountFactory.empty();
             var transferTransaction = new TransferTransaction(toAccount, Money.of(10));
 
-            assertThrows(OverdraftException.class, () -> {
-                fromAccount.apply(transferTransaction);
-            });
+            assertThrows(OverdraftException.class, () -> fromAccount.apply(transferTransaction));
         }
 
         @Test
@@ -142,9 +140,7 @@ public class Specification {
             Account toAccount = AccountFactory.empty();
             var transferTransaction = new TransferTransaction(toAccount, Money.ZERO);
 
-            assertThrows(MinimumMoneyAllowedException.class, () -> {
-                fromAccount.apply(transferTransaction);
-            });
+            assertThrows(MinimumMoneyAllowedException.class, () -> fromAccount.apply(transferTransaction));
         }
     }
 
