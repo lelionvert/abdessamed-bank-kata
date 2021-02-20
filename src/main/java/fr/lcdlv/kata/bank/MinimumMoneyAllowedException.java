@@ -1,18 +1,6 @@
 package fr.lcdlv.kata.bank;
 
-public class MinimumMoneyAllowedException extends Exception {
+public class MinimumMoneyAllowedException extends OperationException {
     public MinimumMoneyAllowedException() {
-    }
-
-    public MinimumMoneyAllowedException(String message) {
-        super(message);
-    }
-
-    public MinimumMoneyAllowedException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public MinimumMoneyAllowedException(Throwable cause) {
-        super(cause);
     }
 }

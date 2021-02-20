@@ -17,7 +17,7 @@ public class AccountTest {
     }
 
     @Test
-    public void depositMoneyShouldAddMoneyToCurrentBalance() throws MinimumMoneyAllowedException {
+    public void depositMoneyShouldAddMoneyToCurrentBalance() throws OperationException {
         Account account = AccountFactory.empty();
 
         account.deposit(Money.of(1));

@@ -23,7 +23,7 @@ public class Specification {
     @Nested
     public class DepositSpec {
         @Test
-        public void depositMoneyOnAccount() throws MinimumMoneyAllowedException {
+        public void depositMoneyOnAccount() throws OperationException {
             Account account = AccountFactory.empty();
 
             account.deposit(Money.of(1));
@@ -33,7 +33,7 @@ public class Specification {
         }
 
         @Test
-        public void depositMuchMoneyOnAccount() throws MinimumMoneyAllowedException {
+        public void depositMuchMoneyOnAccount() throws OperationException {
             Account account = AccountFactory.empty();
 
             account.deposit(Money.of(1));
@@ -90,7 +90,7 @@ public class Specification {
     public class TransferSpec {
 
         @Test
-        public void transferToWithoutOverdraft() throws MinimumMoneyAllowedException, OverdraftException {
+        public void transferToWithoutOverdraft() throws OperationException, OverdraftException {
             Account fromAccount = AccountFactory.wrap(Money.of(20));
             Account toAccount = AccountFactory.wrap(Money.of(0));
 
@@ -101,7 +101,7 @@ public class Specification {
         }
 
         @Test
-        public void transferToMuchMoneyWithoutOverdraft() throws MinimumMoneyAllowedException, OverdraftException {
+        public void transferToMuchMoneyWithoutOverdraft() throws OperationException, OverdraftException {
             Account fromAccount = AccountFactory.wrap(Money.of(50));
             Account toAccount = AccountFactory.empty();
 
@@ -135,7 +135,7 @@ public class Specification {
     @Nested
     public class TransactionsSpec {
         @Test
-        public void transactionsAfterOperations() throws MinimumMoneyAllowedException, OverdraftException {
+        public void transactionsAfterOperations() throws OperationException, OverdraftException {
             Account account = AccountFactory.empty();
 
             actOnAccount(account);
@@ -150,7 +150,7 @@ public class Specification {
             assertEquals(expectedTransactions(), transactions);
         }
 
-        private void actOnAccount(Account account) throws MinimumMoneyAllowedException, OverdraftException {
+        private void actOnAccount(Account account) throws OperationException, OverdraftException {
             account.deposit(Money.of(10));
             account.deposit(Money.of(15));
             account.deposit(Money.of(20));

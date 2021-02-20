@@ -10,20 +10,15 @@ public class Account {
         this.transactions = transactions;
     }
 
-    public void deposit(Money money) throws MinimumMoneyAllowedException {
-        if (notAllowed(money)) {
-            throw new MinimumMoneyAllowedException();
-        }
-        recordDepositTransaction(money);
+    public void deposit(Money money) throws OperationException {
+        var depositOperation = new DepositOperation(money);
+        apply(depositOperation);
     }
 
-    private boolean notAllowed(Money amount) {
-        return amount.isLessThan(MINIMUM_MONEY_ALLOWED);
-    }
-
-    private void recordDepositTransaction(Money amount) {
-        Transaction depositTransaction = new DepositTransaction(amount);
-        transactions.record(depositTransaction);
+    public void apply(Operation operation) throws OperationException {
+        Money balance = balance();
+        Transaction transaction = operation.apply(balance);
+        transactions.record(transaction);
     }
 
     public void withdraw(Money amount) throws OverdraftException {
@@ -43,7 +38,7 @@ public class Account {
         transactions.record(withdrawTransaction);
     }
 
-    public void transferTo(Account toAccount, Money amount) throws OverdraftException, MinimumMoneyAllowedException {
+    public void transferTo(Account toAccount, Money amount) throws OverdraftException, OperationException {
         withdraw(amount);
         toAccount.deposit(amount);
     }
