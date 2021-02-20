@@ -101,8 +101,9 @@ public class Specification {
         public void transferToWithoutOverdraft() throws OperationException {
             Account fromAccount = AccountFactory.wrap(Money.of(20));
             Account toAccount = AccountFactory.wrap(Money.of(0));
+            var transferTransaction = new TransferTransaction(toAccount, Money.of(20));
 
-            fromAccount.transferTo(toAccount, Money.of(20));
+            fromAccount.apply(transferTransaction);
 
             assertEquals(Money.of(0), fromAccount.balance());
             assertEquals(Money.of(20), toAccount.balance());
@@ -112,12 +113,13 @@ public class Specification {
         public void transferToMuchMoneyWithoutOverdraft() throws OperationException {
             Account fromAccount = AccountFactory.wrap(Money.of(50));
             Account toAccount = AccountFactory.empty();
+            var transferTransaction = new TransferTransaction(toAccount, Money.of(10));
 
-            fromAccount.transferTo(toAccount, Money.of(10));
-            fromAccount.transferTo(toAccount, Money.of(10));
-            fromAccount.transferTo(toAccount, Money.of(10));
-            fromAccount.transferTo(toAccount, Money.of(10));
-            fromAccount.transferTo(toAccount, Money.of(10));
+            fromAccount.apply(transferTransaction);
+            fromAccount.apply(transferTransaction);
+            fromAccount.apply(transferTransaction);
+            fromAccount.apply(transferTransaction);
+            fromAccount.apply(transferTransaction);
 
             assertEquals(Money.ZERO, fromAccount.balance());
             assertEquals(Money.of(50), toAccount.balance());
@@ -127,16 +129,22 @@ public class Specification {
         public void transferToWithOverdraft() {
             Account fromAccount = AccountFactory.empty();
             Account toAccount = AccountFactory.empty();
+            var transferTransaction = new TransferTransaction(toAccount, Money.of(10));
 
-            assertThrows(OverdraftException.class, () -> fromAccount.transferTo(toAccount, Money.of(10)));
+            assertThrows(OverdraftException.class, () -> {
+                fromAccount.apply(transferTransaction);
+            });
         }
 
         @Test
         public void transferToMoneyUnderMinimumAllowedOnAccount() {
             Account fromAccount = AccountFactory.empty();
             Account toAccount = AccountFactory.empty();
+            var transferTransaction = new TransferTransaction(toAccount, Money.ZERO);
 
-            assertThrows(MinimumMoneyAllowedException.class, () -> fromAccount.transferTo(toAccount, Money.ZERO));
+            assertThrows(MinimumMoneyAllowedException.class, () -> {
+                fromAccount.apply(transferTransaction);
+            });
         }
     }
 
