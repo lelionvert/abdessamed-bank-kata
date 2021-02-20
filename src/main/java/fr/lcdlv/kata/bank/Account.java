@@ -18,7 +18,7 @@ public class Account {
     }
 
     private boolean notAllowed(Money amount) {
-        return amount.isLessThan(MINIMUM_AMOUNT_OF_MONEY_ALLOWED);
+        return amount.isLessThan(MINIMUM_MONEY_ALLOWED);
     }
 
     private void recordDepositTransaction(Money amount) {
