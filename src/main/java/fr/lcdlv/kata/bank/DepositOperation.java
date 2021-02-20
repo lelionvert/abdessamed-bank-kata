@@ -1,6 +1,6 @@
 package fr.lcdlv.kata.bank;
 
-public class DepositOperation implements Operation{
+public class DepositOperation implements Operation {
 
     public static final Money MINIMUM_MONEY_ALLOWED = Money.of(0.01);
 
