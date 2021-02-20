@@ -14,7 +14,7 @@ public class Account {
         transactions.record(transaction);
     }
 
-    public void transferTo(Account toAccount, Money amount) throws OverdraftException, OperationException {
+    public void transferTo(Account toAccount, Money amount) throws OperationException {
         var operation = new WithdrawOperation(amount);
         apply(operation);
         var depositOperation = new DepositOperation(amount);

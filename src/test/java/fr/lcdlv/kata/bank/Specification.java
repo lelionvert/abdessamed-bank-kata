@@ -98,7 +98,7 @@ public class Specification {
     public class TransferSpec {
 
         @Test
-        public void transferToWithoutOverdraft() throws OperationException, OverdraftException {
+        public void transferToWithoutOverdraft() throws OperationException {
             Account fromAccount = AccountFactory.wrap(Money.of(20));
             Account toAccount = AccountFactory.wrap(Money.of(0));
 
@@ -109,7 +109,7 @@ public class Specification {
         }
 
         @Test
-        public void transferToMuchMoneyWithoutOverdraft() throws OperationException, OverdraftException {
+        public void transferToMuchMoneyWithoutOverdraft() throws OperationException {
             Account fromAccount = AccountFactory.wrap(Money.of(50));
             Account toAccount = AccountFactory.empty();
 
@@ -143,7 +143,7 @@ public class Specification {
     @Nested
     public class TransactionsSpec {
         @Test
-        public void transactionsAfterOperations() throws OperationException, OverdraftException {
+        public void transactionsAfterOperations() throws OperationException {
             Account account = AccountFactory.empty();
 
             actOnAccount(account);
@@ -158,7 +158,7 @@ public class Specification {
             assertEquals(expectedTransactions(), transactions);
         }
 
-        private void actOnAccount(Account account) throws OperationException, OverdraftException {
+        private void actOnAccount(Account account) throws OperationException {
             var depositOperation10 = new DepositOperation(Money.of(10));
             var depositOperation15 = new DepositOperation(Money.of(15));
             var depositOperation20 = new DepositOperation(Money.of(20));
