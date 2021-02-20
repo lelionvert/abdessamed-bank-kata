@@ -2,8 +2,6 @@ package fr.lcdlv.kata.bank;
 
 public class Account {
 
-    public static final Money MINIMUM_MONEY_ALLOWED = Money.of(0.01);
-
     private final Transactions transactions;
 
     public Account(Transactions transactions) {
