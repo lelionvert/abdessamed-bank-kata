@@ -14,15 +14,15 @@ public class Transactions {
         return transactions.size();
     }
 
-    public void record(Transaction transaction) {
+    void record(Transaction transaction) {
         transactions.add(transaction);
     }
 
-    public void record(Transactions transactions) {
+    void record(Transactions transactions) {
         this.transactions.addAll(transactions.transactions);
     }
 
-    public Money sum() {
+    Money sum() {
         return transactions.stream()
                 .map(Transaction::amount)
                 .reduce(Money::add)
