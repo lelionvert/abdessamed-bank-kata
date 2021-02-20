@@ -2,7 +2,7 @@ package fr.lcdlv.kata.bank;
 
 public class Account {
 
-    public static final Money MINIMUM_MONEY_ALLOWED = Money.of(0.01);
+    public static final Money MINIMUM_AMOUNT_OF_MONEY_ALLOWED = Money.of(0.01);
 
     private final Transactions transactions;
 
@@ -17,35 +17,35 @@ public class Account {
         recordDepositTransaction(money);
     }
 
-    private boolean notAllowed(Money money) {
-        return money.isLessThan(MINIMUM_MONEY_ALLOWED);
+    private boolean notAllowed(Money amount) {
+        return amount.isLessThan(MINIMUM_AMOUNT_OF_MONEY_ALLOWED);
     }
 
-    private void recordDepositTransaction(Money money) {
-        Transaction depositTransaction = new DepositTransaction(money);
+    private void recordDepositTransaction(Money amount) {
+        Transaction depositTransaction = new DepositTransaction(amount);
         transactions.record(depositTransaction);
     }
 
-    public void withdraw(Money money) throws OverdraftException {
-        if (overdraft(money)) {
+    public void withdraw(Money amount) throws OverdraftException {
+        if (overdraft(amount)) {
             throw new OverdraftException();
         }
-        recordWithdrawTransaction(money);
+        recordWithdrawTransaction(amount);
     }
 
-    private boolean overdraft(Money money) {
+    private boolean overdraft(Money amount) {
         Money balance = balance();
-        return money.isBiggerThan(balance);
+        return amount.isBiggerThan(balance);
     }
 
-    private void recordWithdrawTransaction(Money money) {
-        Transaction withdrawTransaction = new WithdrawTransaction(money);
+    private void recordWithdrawTransaction(Money amount) {
+        Transaction withdrawTransaction = new WithdrawTransaction(amount);
         transactions.record(withdrawTransaction);
     }
 
-    public void transferTo(Account toAccount, Money money) throws OverdraftException, MinimumMoneyAllowedException {
-        withdraw(money);
-        toAccount.deposit(money);
+    public void transferTo(Account toAccount, Money amount) throws OverdraftException, MinimumMoneyAllowedException {
+        withdraw(amount);
+        toAccount.deposit(amount);
     }
 
     public Money balance() {
