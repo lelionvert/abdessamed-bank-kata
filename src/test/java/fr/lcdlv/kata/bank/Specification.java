@@ -122,6 +122,14 @@ public class Specification {
 
             assertThrows(OverdraftException.class, () -> fromAccount.transferTo(toAccount, Money.of(10)));
         }
+
+        @Test
+        public void transferToMoneyUnderMinimumAllowedOnAccount() {
+            Account fromAccount = AccountFactory.empty();
+            Account toAccount = AccountFactory.empty();
+
+            assertThrows(MinimumMoneyAllowedException.class, () -> fromAccount.transferTo(toAccount, Money.ZERO));
+        }
     }
 
     @Nested
