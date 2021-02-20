@@ -26,7 +26,8 @@ public class Specification {
         public void depositMoneyOnAccount() throws OperationException {
             Account account = AccountFactory.empty();
 
-            account.deposit(Money.of(1));
+            var depositOperation = new DepositOperation(Money.of(1));
+            account.apply(depositOperation);
 
             Money balance = account.balance();
             assertEquals(Money.of(1), balance);
@@ -35,11 +36,12 @@ public class Specification {
         @Test
         public void depositMuchMoneyOnAccount() throws OperationException {
             Account account = AccountFactory.empty();
+            var depositOperation = new DepositOperation(Money.of(1));
 
-            account.deposit(Money.of(1));
-            account.deposit(Money.of(1));
-            account.deposit(Money.of(1));
-            account.deposit(Money.of(1));
+            account.apply(depositOperation);
+            account.apply(depositOperation);
+            account.apply(depositOperation);
+            account.apply(depositOperation);
 
             Money balance = account.balance();
             assertEquals(Money.of(4), balance);
@@ -49,7 +51,10 @@ public class Specification {
         public void depositMoneyUnderMinimumAllowedOnAccount() {
             Account account = AccountFactory.empty();
 
-            assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.ZERO));
+            assertThrows(MinimumMoneyAllowedException.class, () -> {
+                var depositOperation = new DepositOperation(Money.ZERO);
+                account.apply(depositOperation);
+            });
         }
     }
 
@@ -151,11 +156,15 @@ public class Specification {
         }
 
         private void actOnAccount(Account account) throws OperationException, OverdraftException {
-            account.deposit(Money.of(10));
-            account.deposit(Money.of(15));
-            account.deposit(Money.of(20));
+            var depositOperation10 = new DepositOperation(Money.of(10));
+            var depositOperation15 = new DepositOperation(Money.of(15));
+            var depositOperation20 = new DepositOperation(Money.of(20));
+
+            account.apply(depositOperation10);
+            account.apply(depositOperation15);
+            account.apply(depositOperation20);
             account.withdraw(Money.of(20));
-            account.deposit(Money.of(20));
+            account.apply(depositOperation20);
             account.withdraw(Money.of(30));
         }
 

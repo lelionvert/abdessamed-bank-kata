@@ -20,7 +20,8 @@ public class AccountTest {
     public void depositMoneyShouldAddMoneyToCurrentBalance() throws OperationException {
         Account account = AccountFactory.empty();
 
-        account.deposit(Money.of(1));
+        var depositOperation = new DepositOperation(Money.of(1));
+        account.apply(depositOperation);
 
         Money balance = account.balance();
         assertEquals(Money.of(1), balance);
@@ -30,6 +31,9 @@ public class AccountTest {
     public void depositMoneyUnderMinimumAllowedShouldThrowMinimumMoneyAllowedException() {
         Account account = AccountFactory.empty();
 
-        assertThrows(MinimumMoneyAllowedException.class, () -> account.deposit(Money.ZERO));
+        assertThrows(MinimumMoneyAllowedException.class, () -> {
+            var depositOperation = new DepositOperation(Money.ZERO);
+            account.apply(depositOperation);
+        });
     }
 }

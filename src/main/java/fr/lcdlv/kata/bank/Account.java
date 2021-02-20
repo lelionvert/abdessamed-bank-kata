@@ -8,11 +8,6 @@ public class Account {
         this.transactions = transactions;
     }
 
-    public void deposit(Money money) throws OperationException {
-        var depositOperation = new DepositOperation(money);
-        apply(depositOperation);
-    }
-
     public void apply(Operation operation) throws OperationException {
         Money balance = balance();
         Transaction transaction = operation.apply(balance);
@@ -38,7 +33,8 @@ public class Account {
 
     public void transferTo(Account toAccount, Money amount) throws OverdraftException, OperationException {
         withdraw(amount);
-        toAccount.deposit(amount);
+        var depositOperation = new DepositOperation(amount);
+        toAccount.apply(depositOperation);
     }
 
     public Money balance() {
