@@ -1,7 +1,7 @@
 package fr.lcdlv.kata.bank;
 
 public class WithdrawOperation implements Operation {
-    private Money amount;
+    private final Money amount;
 
     public WithdrawOperation(Money amount) {
         this.amount = amount;

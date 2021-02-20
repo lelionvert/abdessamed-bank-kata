@@ -1,8 +1,8 @@
 package fr.lcdlv.kata.bank;
 
 public class TransferTransaction implements Operation {
-    private Account toAccount;
-    private Money amount;
+    private final Account toAccount;
+    private final Money amount;
 
     public TransferTransaction(Account toAccount, Money amount) {
         this.toAccount = toAccount;

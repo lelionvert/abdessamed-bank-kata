@@ -4,7 +4,7 @@ public class DepositOperation implements Operation{
 
     public static final Money MINIMUM_MONEY_ALLOWED = Money.of(0.01);
 
-    private Money amount;
+    private final Money amount;
 
     public DepositOperation(Money amount) {
         this.amount = amount;
