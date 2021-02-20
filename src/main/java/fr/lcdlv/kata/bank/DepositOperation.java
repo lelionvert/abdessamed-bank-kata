@@ -6,15 +6,15 @@ public class DepositOperation implements Operation{
 
     private Money amount;
 
-    public DepositOperation(Money amount) throws MinimumMoneyAllowedException {
-        if (notAllowed(amount)) {
-            throw new MinimumMoneyAllowedException();
-        }
+    public DepositOperation(Money amount) {
         this.amount = amount;
     }
 
     @Override
-    public Transaction apply(Money balance) {
+    public Transaction apply(Money balance) throws MinimumMoneyAllowedException {
+        if (notAllowed(amount)) {
+            throw new MinimumMoneyAllowedException();
+        }
         return new DepositTransaction(amount);
     }
 
