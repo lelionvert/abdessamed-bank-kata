@@ -61,7 +61,7 @@ public class Specification {
     @Nested
     public class WithdrawSpec {
         @Test
-        public void withdrawWithoutOverdraft() throws OperationException {
+        public void withdrawMoneyFromAccountWithoutOverdraft() throws OperationException {
             Account account = AccountFactory.wrap(Money.of(50));
             var operation = new WithdrawOperation(Money.of(10));
 
@@ -72,7 +72,7 @@ public class Specification {
         }
 
         @Test
-        public void withdrawMuchMoneyWithoutOverdraft() throws OperationException {
+        public void withdrawMuchMoneyFromAccountWithoutOverdraft() throws OperationException {
             Account account = AccountFactory.wrap(Money.of(50));
             var operation = new WithdrawOperation(Money.of(10));
 
@@ -86,7 +86,7 @@ public class Specification {
         }
 
         @Test
-        public void withdrawWithOverdraft() {
+        public void withdrawMoneyFromAccountWithOverdraft() {
             Account account = AccountFactory.empty();
             var operation = new WithdrawOperation(Money.of(10));
 
@@ -98,7 +98,7 @@ public class Specification {
     public class TransferSpec {
 
         @Test
-        public void transferToWithoutOverdraft() throws OperationException {
+        public void transferMoneyToAnotherAccountWithoutOverdraft() throws OperationException {
             Account fromAccount = AccountFactory.wrap(Money.of(20));
             Account toAccount = AccountFactory.wrap(Money.of(0));
             var transferTransaction = new TransferTransaction(toAccount, Money.of(20));
@@ -110,7 +110,7 @@ public class Specification {
         }
 
         @Test
-        public void transferToMuchMoneyWithoutOverdraft() throws OperationException {
+        public void transferMuchMoneyToAnotherAccountWithoutOverdraft() throws OperationException {
             Account fromAccount = AccountFactory.wrap(Money.of(50));
             Account toAccount = AccountFactory.empty();
             var transferTransaction = new TransferTransaction(toAccount, Money.of(10));
@@ -126,7 +126,7 @@ public class Specification {
         }
 
         @Test
-        public void transferToWithOverdraft() {
+        public void transferMoneyToAnotherAccountWithOverdraft() {
             Account fromAccount = AccountFactory.empty();
             Account toAccount = AccountFactory.empty();
             var transferTransaction = new TransferTransaction(toAccount, Money.of(10));
@@ -137,7 +137,7 @@ public class Specification {
         }
 
         @Test
-        public void transferToMoneyUnderMinimumAllowedOnAccount() {
+        public void transferMoneyToAnotherAccountUnderMinimumAllowedOnAccount() {
             Account fromAccount = AccountFactory.empty();
             Account toAccount = AccountFactory.empty();
             var transferTransaction = new TransferTransaction(toAccount, Money.ZERO);
