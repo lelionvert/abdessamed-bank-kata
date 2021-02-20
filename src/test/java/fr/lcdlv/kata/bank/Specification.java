@@ -147,6 +147,20 @@ public class Specification {
     }
 
     @Nested
+    public class InterestSpec {
+        @Test
+        public void addInterestOnAccount() throws OperationException {
+            Account account = AccountFactory.wrap(Money.of(100));
+
+            var interestOperation = new InterestOperation(10.00d);
+            account.apply(interestOperation);
+
+            Money balance = account.balance();
+            assertEquals(Money.of(110), balance);
+        }
+    }
+
+    @Nested
     public class TransactionsSpec {
         @Test
         public void transactionsAfterOperations() throws OperationException {

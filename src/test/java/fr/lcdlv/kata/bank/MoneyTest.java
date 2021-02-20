@@ -45,6 +45,15 @@ public class MoneyTest {
     }
 
     @Test
+    public void multiplyByAConstant() {
+        Money one = Money.of(1);
+
+        Money ten = one.multiplyBy(10);
+
+        assertEquals(Money.of(10), ten);
+    }
+
+    @Test
     public void compareToEquivalentMoney() {
         Money one = Money.of(1);
         Money anotherOne = Money.of(1);

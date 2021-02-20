@@ -34,6 +34,12 @@ public class Money implements Comparable<Money> {
         return add(other.opposite());
     }
 
+    public Money multiplyBy(double constant) {
+        var wrapped = BigDecimal.valueOf(constant);
+        var result = value.multiply(wrapped);
+        return Money.of(result);
+    }
+
     public Money opposite() {
         BigDecimal oppositeValue = value.multiply(MINUS_ONE);
         return Money.of(oppositeValue);
