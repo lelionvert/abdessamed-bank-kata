@@ -1,6 +1,6 @@
 package fr.lcdlv.kata.bank;
 
-public class OverdraftException extends Exception {
+public class OverdraftException extends OperationException {
     public OverdraftException() {
     }
 }

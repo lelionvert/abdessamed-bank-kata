@@ -61,23 +61,25 @@ public class Specification {
     @Nested
     public class WithdrawSpec {
         @Test
-        public void withdrawWithoutOverdraft() throws OverdraftException {
+        public void withdrawWithoutOverdraft() throws OperationException {
             Account account = AccountFactory.wrap(Money.of(50));
+            var operation = new WithdrawOperation(Money.of(10));
 
-            account.withdraw(Money.of(10));
+            account.apply(operation);
 
             Money balance = account.balance();
             assertEquals(balance, Money.of(40));
         }
 
         @Test
-        public void withdrawMuchMoneyWithoutOverdraft() throws OverdraftException {
+        public void withdrawMuchMoneyWithoutOverdraft() throws OperationException {
             Account account = AccountFactory.wrap(Money.of(50));
+            var operation = new WithdrawOperation(Money.of(10));
 
-            account.withdraw(Money.of(10));
-            account.withdraw(Money.of(10));
-            account.withdraw(Money.of(10));
-            account.withdraw(Money.of(10));
+            account.apply(operation);
+            account.apply(operation);
+            account.apply(operation);
+            account.apply(operation);
 
             Money balance = account.balance();
             assertEquals(balance, Money.of(10));
@@ -86,8 +88,9 @@ public class Specification {
         @Test
         public void withdrawWithOverdraft() {
             Account account = AccountFactory.empty();
+            var operation = new WithdrawOperation(Money.of(10));
 
-            assertThrows(OverdraftException.class, () -> account.withdraw(Money.of(10)));
+            assertThrows(OverdraftException.class, () -> account.apply(operation));
         }
     }
 
@@ -159,13 +162,15 @@ public class Specification {
             var depositOperation10 = new DepositOperation(Money.of(10));
             var depositOperation15 = new DepositOperation(Money.of(15));
             var depositOperation20 = new DepositOperation(Money.of(20));
+            var withdrawOperation20 = new WithdrawOperation(Money.of(20));
+            var withdrawOperation30 = new WithdrawOperation(Money.of(30));
 
             account.apply(depositOperation10);
             account.apply(depositOperation15);
             account.apply(depositOperation20);
-            account.withdraw(Money.of(20));
+            account.apply(withdrawOperation20);
             account.apply(depositOperation20);
-            account.withdraw(Money.of(30));
+            account.apply(withdrawOperation30);
         }
 
         private Transactions expectedTransactions() {

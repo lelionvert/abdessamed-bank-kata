@@ -14,25 +14,9 @@ public class Account {
         transactions.record(transaction);
     }
 
-    public void withdraw(Money amount) throws OverdraftException {
-        if (overdraft(amount)) {
-            throw new OverdraftException();
-        }
-        recordWithdrawTransaction(amount);
-    }
-
-    private boolean overdraft(Money amount) {
-        Money balance = balance();
-        return amount.isBiggerThan(balance);
-    }
-
-    private void recordWithdrawTransaction(Money amount) {
-        Transaction withdrawTransaction = new WithdrawTransaction(amount);
-        transactions.record(withdrawTransaction);
-    }
-
     public void transferTo(Account toAccount, Money amount) throws OverdraftException, OperationException {
-        withdraw(amount);
+        var operation = new WithdrawOperation(amount);
+        apply(operation);
         var depositOperation = new DepositOperation(amount);
         toAccount.apply(depositOperation);
     }
