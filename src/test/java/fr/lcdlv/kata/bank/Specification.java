@@ -3,6 +3,8 @@ package fr.lcdlv.kata.bank;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -149,20 +151,6 @@ public class Specification {
         @Test
         public void transactionsAfterOperations() throws OperationException {
             Account account = AccountFactory.empty();
-
-            actOnAccount(account);
-
-            assertAccount(account);
-        }
-
-        private void assertAccount(Account account) {
-            Transactions transactions = account.transactions();
-            int transactionNumber = transactions.size();
-            assertEquals(6, transactionNumber);
-            assertEquals(expectedTransactions(), transactions);
-        }
-
-        private void actOnAccount(Account account) throws OperationException {
             var depositOperation10 = new DepositOperation(Money.of(10));
             var depositOperation15 = new DepositOperation(Money.of(15));
             var depositOperation20 = new DepositOperation(Money.of(20));
@@ -175,19 +163,24 @@ public class Specification {
             account.apply(withdrawOperation20);
             account.apply(depositOperation20);
             account.apply(withdrawOperation30);
+
+            Transactions transactions = account.transactions();
+            int transactionNumber = transactions.size();
+            assertEquals(6, transactionNumber);
+            assertEquals(expectedTransactions(
+                    depositTransaction(Money.of(10)),
+                    depositTransaction(Money.of(15)),
+                    depositTransaction(Money.of(20)),
+                    withdrawTransaction(Money.of(20)),
+                    depositTransaction(Money.of(20)),
+                    withdrawTransaction(Money.of(30))),
+                    transactions);
         }
 
-        private Transactions expectedTransactions() {
-            Transactions transactions = new Transactions();
-
-            transactions.record(depositTransaction(Money.of(10)));
-            transactions.record(depositTransaction(Money.of(15)));
-            transactions.record(depositTransaction(Money.of(20)));
-            transactions.record(withdrawTransaction(Money.of(20)));
-            transactions.record(depositTransaction(Money.of(20)));
-            transactions.record(withdrawTransaction(Money.of(30)));
-
-            return transactions;
+        private Transactions expectedTransactions(Transaction... transactionsTable) {
+            return Arrays.stream(transactionsTable).collect(Transactions::new,
+                    Transactions::record,
+                    Transactions::record);
         }
 
         private Transaction withdrawTransaction(Money amount) {
@@ -198,5 +191,4 @@ public class Specification {
             return new DepositTransaction(amount);
         }
     }
-
 }

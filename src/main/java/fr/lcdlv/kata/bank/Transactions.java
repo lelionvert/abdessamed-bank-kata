@@ -8,7 +8,7 @@ import static java.util.stream.Collectors.joining;
 
 public class Transactions {
 
-    private final List<Transaction> transactions = new ArrayList<>();
+    protected final List<Transaction> transactions = new ArrayList<>();
 
     public int size() {
         return transactions.size();
@@ -16,6 +16,10 @@ public class Transactions {
 
     public void record(Transaction transaction) {
         transactions.add(transaction);
+    }
+
+    public void record(Transactions transactions) {
+        this.transactions.addAll(transactions.transactions);
     }
 
     public Money sum() {
