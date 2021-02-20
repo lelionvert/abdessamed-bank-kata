@@ -25,7 +25,8 @@ public class Transactions {
     public Money sum() {
         return transactions.stream()
                 .map(Transaction::amount)
-                .reduce(Money.ZERO, Money::add);
+                .reduce(Money::add)
+                .orElse(Money.ZERO);
     }
 
     @Override
