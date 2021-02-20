@@ -111,7 +111,7 @@ public class Specification {
             fromAccount.transferTo(toAccount, Money.of(10));
             fromAccount.transferTo(toAccount, Money.of(10));
 
-            assertEquals(Money.of(0), fromAccount.balance());
+            assertEquals(Money.ZERO, fromAccount.balance());
             assertEquals(Money.of(50), toAccount.balance());
         }
 
