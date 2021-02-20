@@ -87,6 +87,44 @@ public class Specification {
     }
 
     @Nested
+    public class TransferSpec {
+
+        @Test
+        public void transferToWithoutOverdraft() throws MinimumMoneyAllowedException, OverdraftException {
+            Account fromAccount = AccountFactory.wrap(Money.of(20));
+            Account toAccount = AccountFactory.wrap(Money.of(0));
+
+            fromAccount.transferTo(toAccount, Money.of(20));
+
+            assertEquals(Money.of(0), fromAccount.balance());
+            assertEquals(Money.of(20), toAccount.balance());
+        }
+
+        @Test
+        public void transferToMuchMoneyWithoutOverdraft() throws MinimumMoneyAllowedException, OverdraftException {
+            Account fromAccount = AccountFactory.wrap(Money.of(50));
+            Account toAccount = AccountFactory.empty();
+
+            fromAccount.transferTo(toAccount, Money.of(10));
+            fromAccount.transferTo(toAccount, Money.of(10));
+            fromAccount.transferTo(toAccount, Money.of(10));
+            fromAccount.transferTo(toAccount, Money.of(10));
+            fromAccount.transferTo(toAccount, Money.of(10));
+
+            assertEquals(Money.of(0), fromAccount.balance());
+            assertEquals(Money.of(50), toAccount.balance());
+        }
+
+        @Test
+        public void withdrawWithOverdraft() {
+            Account fromAccount = AccountFactory.empty();
+            Account toAccount = AccountFactory.empty();
+
+            assertThrows(OverdraftException.class, () -> fromAccount.transferTo(toAccount, Money.of(10)));
+        }
+    }
+
+    @Nested
     public class TransactionsSpec {
         @Test
         public void transactionsAfterOperations() throws MinimumMoneyAllowedException, OverdraftException {

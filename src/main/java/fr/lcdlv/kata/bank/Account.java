@@ -35,7 +35,7 @@ public class Account {
 
     private boolean overdraft(Money money) {
         Money balance = balance();
-        return money.isBiggerThanOrEqualTo(balance);
+        return money.isBiggerThan(balance);
     }
 
     private void recordWithdrawTransaction(Money money) {
@@ -49,5 +49,11 @@ public class Account {
 
     public Transactions transactions() {
         return transactions;
+    }
+
+    public void transferTo(Account toAccount, Money money) throws OverdraftException, MinimumMoneyAllowedException {
+        withdraw(money);
+        toAccount.deposit(money);
+        return;
     }
 }

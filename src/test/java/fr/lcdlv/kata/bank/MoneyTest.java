@@ -65,6 +65,26 @@ public class MoneyTest {
     }
 
     @Test
+    public void isBiggerThanShouldReturnTrue() {
+        Money one = Money.of(1);
+        Money two = Money.of(2);
+
+        boolean isBiggerOrEqual = two.isBiggerThan(one);
+
+        assertTrue(isBiggerOrEqual);
+    }
+
+    @Test
+    public void isBiggerThanShouldReturnFalse() {
+        Money one = Money.of(1);
+        Money two = Money.of(1);
+
+        boolean isBiggerOrEqual = two.isBiggerThan(one);
+
+        assertFalse(isBiggerOrEqual);
+    }
+
+    @Test
     public void isLessThanShouldReturnTrue() {
         Money one = Money.of(1);
         Money two = Money.of(2);
