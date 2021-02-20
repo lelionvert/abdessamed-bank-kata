@@ -11,8 +11,8 @@ public class TransferTransaction implements Operation {
 
     @Override
     public Transaction apply(Money balance) throws OperationException {
-        var operation = new WithdrawOperation(amount);
-        Transaction withdrawnTransaction = operation.apply(balance);
+        var withdrawOperation = new WithdrawOperation(amount);
+        Transaction withdrawnTransaction = withdrawOperation.apply(balance);
 
         var depositOperation = new DepositOperation(amount);
         toAccount.apply(depositOperation);
