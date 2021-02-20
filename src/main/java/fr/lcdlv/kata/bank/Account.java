@@ -43,17 +43,16 @@ public class Account {
         transactions.record(withdrawTransaction);
     }
 
+    public void transferTo(Account toAccount, Money money) throws OverdraftException, MinimumMoneyAllowedException {
+        withdraw(money);
+        toAccount.deposit(money);
+    }
+
     public Money balance() {
         return transactions.sum();
     }
 
     public Transactions transactions() {
         return transactions;
-    }
-
-    public void transferTo(Account toAccount, Money money) throws OverdraftException, MinimumMoneyAllowedException {
-        withdraw(money);
-        toAccount.deposit(money);
-        return;
     }
 }

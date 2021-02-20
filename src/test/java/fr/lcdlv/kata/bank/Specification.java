@@ -116,7 +116,7 @@ public class Specification {
         }
 
         @Test
-        public void withdrawWithOverdraft() {
+        public void transferToWithOverdraft() {
             Account fromAccount = AccountFactory.empty();
             Account toAccount = AccountFactory.empty();
 
