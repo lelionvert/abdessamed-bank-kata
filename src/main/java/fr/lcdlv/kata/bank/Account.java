@@ -9,9 +9,8 @@ public class Account {
     }
 
     public void apply(Operation operation) throws OperationException {
-        Money balance = balance();
-        Transaction transaction = operation.apply(balance);
-        transactions.record(transaction);
+        Transactions operationTransactions = operation.apply(transactions);
+        transactions.record(operationTransactions);
     }
 
     public Money balance() {
