@@ -1,7 +1,9 @@
 package fr.lcdlv.kata.bank;
 
 public interface Operation {
-    Transaction apply(Money balance) throws OperationException;
+    default Transaction apply(Money balance) throws OperationException {
+        return null;
+    }
 
     default Transactions apply(Transactions accountTransactions) throws OperationException {
         Money balance = accountTransactions.sum();

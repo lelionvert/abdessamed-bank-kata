@@ -11,11 +11,15 @@ public class DepositOperation implements Operation {
     }
 
     @Override
-    public Transaction apply(Money balance) throws MinimumMoneyAllowedException {
+    public Transactions apply(Transactions accountTransactions) throws OperationException {
         if (notAllowed(amount)) {
             throw new MinimumMoneyAllowedException();
         }
-        return new DepositTransaction(amount);
+        Transaction transaction = new DepositTransaction(amount);
+        Transactions operationTransactions = new Transactions();
+        operationTransactions.record(transaction);
+
+        return operationTransactions;
     }
 
     private boolean notAllowed(Money amount) {
