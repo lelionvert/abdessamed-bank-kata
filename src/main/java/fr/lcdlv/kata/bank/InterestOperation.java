@@ -8,8 +8,13 @@ public class InterestOperation implements Operation {
     }
 
     @Override
-    public Transaction apply(Money balance) {
+    public Transactions apply(Transactions accountTransactions) {
+        Money balance = accountTransactions.sum();
         var interest = balance.multiplyBy(rate / 100);
-        return new DepositTransaction(interest);
+        Transaction transaction = new DepositTransaction(interest);
+        Transactions operationTransactions = new Transactions();
+        operationTransactions.record(transaction);
+
+        return operationTransactions;
     }
 }
