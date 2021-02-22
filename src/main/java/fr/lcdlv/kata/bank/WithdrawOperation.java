@@ -8,11 +8,16 @@ public class WithdrawOperation implements Operation {
     }
 
     @Override
-    public Transaction apply(Money balance) throws OperationException {
+    public Transactions apply(Transactions accountTransactions) throws OperationException {
+        Money balance = accountTransactions.sum();
         if (overdraft(balance)) {
             throw new OverdraftException();
         }
-        return new WithdrawTransaction(amount);
+        Transaction transaction = new WithdrawTransaction(amount);
+        Transactions operationTransactions = new Transactions();
+        operationTransactions.record(transaction);
+
+        return operationTransactions;
     }
 
     private boolean overdraft(Money balance) {

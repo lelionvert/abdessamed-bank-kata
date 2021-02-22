@@ -11,16 +11,12 @@ public class TransferOperation implements Operation {
 
     @Override
     public Transactions apply(Transactions accountTransactions) throws OperationException {
-        Money balance = accountTransactions.sum();
         var withdrawOperation = new WithdrawOperation(amount);
-        Transaction withdrawnTransaction = withdrawOperation.apply(balance);
+        Transactions withdrawnTransactions = withdrawOperation.apply(accountTransactions);
 
         var depositOperation = new DepositOperation(amount);
         toAccount.apply(depositOperation);
 
-        Transactions operationTransactions = new Transactions();
-        operationTransactions.record(withdrawnTransaction);
-
-        return operationTransactions;
+        return withdrawnTransactions;
     }
 }
