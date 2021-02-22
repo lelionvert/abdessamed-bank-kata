@@ -5,7 +5,9 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-public class Money implements Comparable<Money> {
+import static fr.lcdlv.kata.bank.ExtendedComparable.LogicOperation.*;
+
+public class Money implements ExtendedComparable<Money> {
 
     private static final BigDecimal MINUS_ONE = BigDecimal.valueOf(-1)
             .setScale(2, RoundingMode.HALF_EVEN);
@@ -50,19 +52,19 @@ public class Money implements Comparable<Money> {
     }
 
     public boolean isBiggerThanOrEqualTo(Money other) {
-        return compareTo(other) >= 0;
+        return compareTo(other, BIGGER_THAN_OR_EQUAL_TO);
     }
 
     public boolean isBiggerThan(Money other) {
-        return compareTo(other) > 0;
+        return compareTo(other, BIGGER_THAN);
     }
 
     public boolean isLessThan(Money other) {
-        return compareTo(other) < 0;
+        return compareTo(other, LESS_THAN);
     }
 
     public boolean isLessThanOrEqualTo(Money other) {
-        return compareTo(other) <= 0;
+        return compareTo(other, LESS_THAN_OR_EQUAL_TO);
     }
 
     @Override
