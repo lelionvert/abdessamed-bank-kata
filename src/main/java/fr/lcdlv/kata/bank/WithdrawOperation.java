@@ -1,5 +1,7 @@
 package fr.lcdlv.kata.bank;
 
+import static fr.lcdlv.kata.bank.ExtendedComparable.LogicOperation.BIGGER_THAN;
+
 public class WithdrawOperation implements Operation {
     private final Money amount;
 
@@ -21,6 +23,6 @@ public class WithdrawOperation implements Operation {
     }
 
     private boolean overdraft(Money balance) {
-        return amount.isBiggerThan(balance);
+        return amount.compareTo(balance, BIGGER_THAN);
     }
 }

@@ -1,12 +1,14 @@
 package fr.lcdlv.kata.bank;
 
+import static fr.lcdlv.kata.bank.ExtendedComparable.LogicOperation.BIGGER_THAN_OR_EQUAL_TO;
+
 public class TransactionsFactory {
 
     public static Transactions wrap(Money... monies) {
         Transactions transactions = new Transactions();
         for (Money money : monies) {
             Transaction transaction;
-            if (money.isBiggerThanOrEqualTo(Money.ZERO)) {
+            if (money.compareTo(Money.ZERO, BIGGER_THAN_OR_EQUAL_TO)) {
                 transaction = new DepositTransaction(money);
             }
             else {

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static fr.lcdlv.kata.bank.ExtendedComparable.LogicOperation.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MoneyTest {
@@ -68,7 +69,7 @@ public class MoneyTest {
         Money one = Money.of(1);
         Money two = Money.of(2);
 
-        boolean isBiggerOrEqual = two.isBiggerThanOrEqualTo(one);
+        boolean isBiggerOrEqual = two.compareTo(one, BIGGER_THAN_OR_EQUAL_TO);
 
         assertTrue(isBiggerOrEqual);
     }
@@ -78,7 +79,7 @@ public class MoneyTest {
         Money one = Money.of(1);
         Money two = Money.of(2);
 
-        boolean isBiggerOrEqual = two.isBiggerThan(one);
+        boolean isBiggerOrEqual = two.compareTo(one, BIGGER_THAN);
 
         assertTrue(isBiggerOrEqual);
     }
@@ -88,7 +89,7 @@ public class MoneyTest {
         Money one = Money.of(1);
         Money two = Money.of(1);
 
-        boolean isBiggerOrEqual = two.isBiggerThan(one);
+        boolean isBiggerOrEqual = two.compareTo(one, BIGGER_THAN);
 
         assertFalse(isBiggerOrEqual);
     }
@@ -98,7 +99,7 @@ public class MoneyTest {
         Money one = Money.of(1);
         Money two = Money.of(2);
 
-        boolean isLessThanOrEqualTo = one.isLessThan(two);
+        boolean isLessThanOrEqualTo = one.compareTo(two, LESS_THAN);
 
         assertTrue(isLessThanOrEqualTo);
     }
@@ -108,7 +109,7 @@ public class MoneyTest {
         Money one = Money.of(1);
         Money two = Money.of(2);
 
-        boolean isLessThanOrEqualTo = one.isLessThanOrEqualTo(two);
+        boolean isLessThanOrEqualTo = one.compareTo(two, LESS_THAN_OR_EQUAL_TO);
 
         assertTrue(isLessThanOrEqualTo);
     }
